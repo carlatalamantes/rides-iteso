@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:rides_iteso/signup/signupPage.dart';
 
-class LoginPage extends StatefulWidget {
-  LoginPage({Key? key}) : super(key: key);
+class SignupPage extends StatefulWidget {
+  SignupPage({Key? key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignupPageState createState() => _SignupPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          foregroundColor: Colors.black,
+          elevation: 0.0,
+        ),
         body: SingleChildScrollView(
             padding: EdgeInsets.all(20),
             child: Center(
@@ -24,6 +28,39 @@ class _LoginPageState extends State<LoginPage> {
                         image: AssetImage('assets/images/logo_blue.png'),
                         height: 250,
                       )),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Nombre(s)',
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Apellido paterno',
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Apellido materno',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
@@ -47,23 +84,12 @@ class _LoginPageState extends State<LoginPage> {
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          minimumSize: const Size.fromHeight(50),
-                          backgroundColor: Color(0xFF064789)),
-                      onPressed: () {},
-                      child: const Text('INICIAR SESIÓN'),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Repetir contraseña',
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Text(
-                    '¿No tienes cuenta?',
-                    style: TextStyle(color: Color(0x80333533)),
                   ),
                   Padding(
                     padding:
@@ -74,19 +100,11 @@ class _LoginPageState extends State<LoginPage> {
                             borderRadius: BorderRadius.circular(5),
                           ),
                           minimumSize: const Size.fromHeight(50),
-                          backgroundColor: Colors.white),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SignupPage()),
-                        );
-                      },
-                      child: const Text(
-                        'REGISTRARME',
-                        style: TextStyle(color: Color(0xFF064789)),
-                      ),
+                          backgroundColor: Color(0xFF064789)),
+                      onPressed: () {},
+                      child: const Text('CREAR CUENTA'),
                     ),
-                  )
+                  ),
                 ],
               ),
             )));

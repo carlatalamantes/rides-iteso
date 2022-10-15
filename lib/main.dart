@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rides_iteso/login/loginPage.dart';
+import 'package:rides_iteso/signup/signupPage.dart';
 
 void main() => runApp(const MyApp());
 
