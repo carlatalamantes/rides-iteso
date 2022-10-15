@@ -11,11 +11,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  
   var emailTextController = TextEditingController();
-  var TextController = TextEditingController();
   var psswrdTextController = TextEditingController();
-  
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +23,12 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             children: [
               const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: Image(
-                    image: AssetImage('assets/images/logo_blue.png'),
-                    height: 250,
-                  ),),
-                  
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: Image(
+                  image: AssetImage('assets/images/logo_blue.png'),
+                  height: 250,
+                ),
+              ),
               base_TextFormField(
                 nombreTextController: emailTextController,
                 labelText: 'Correo electrónico',
@@ -42,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               base_ElevatedButton(
                 text: 'INICIAR SESIÓN',
-                backgroundColor: Color(0xFF064789),
+                backgroundColor: const Color(0xFF064789),
                 onPressed: () {
                   iniciarSessionButton(context);
                 },
@@ -69,9 +66,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  iniciarSessionButton(BuildContext context){
-
-  }
+  iniciarSessionButton(BuildContext context) {}
 
   registrarmeButton(BuildContext context) {
     Navigator.push(

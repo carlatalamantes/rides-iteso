@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
+import 'package:rides_iteso/signup/completeProfile.dart';
 
 class SignupPage extends StatefulWidget {
   SignupPage({Key? key}) : super(key: key);
@@ -24,17 +25,10 @@ class _SignupPageState extends State<SignupPage> {
         elevation: 0.0,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Center(
           child: Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: Image(
-                  image: AssetImage('assets/images/logo_blue.png'),
-                  height: 250,
-                ),
-              ),
               base_TextFormField(
                 nombreTextController: nombreTextController,
                 labelText: 'Nombre(s)',
@@ -72,7 +66,9 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                       minimumSize: const Size.fromHeight(50),
                       backgroundColor: const Color(0xFF064789)),
-                  onPressed: () {},
+                  onPressed: () {
+                    crearCuentaButton(context);
+                  },
                   child: const Text('CREAR CUENTA'),
                 ),
               ),
@@ -83,5 +79,10 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 
-  
+  crearCuentaButton(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CompleteProfilePage()),
+    );
+  }
 }
