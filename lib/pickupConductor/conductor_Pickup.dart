@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:rides_iteso/components/base_Dropdown.dart';
+import 'package:rides_iteso/components/base_DropdownButton.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
-import 'package:rides_iteso/signup/driver/conductor_Car.dart';
-import 'package:rides_iteso/signup/passenger/pasajero_Pickup.dart';
+import 'package:rides_iteso/rides/conductor_Car.dart';
+import 'package:rides_iteso/rides/pasajero_Pickup.dart';
 
 class ConductorPickupPage extends StatefulWidget {
   ConductorPickupPage({Key? key}) : super(key: key);
@@ -75,48 +75,54 @@ class _ConductorPickupPageState extends State<ConductorPickupPage> {
           _data[index].isExpanded = !isExpanded;
         });
       },
-      children: _data.map<ExpansionPanel>((Item item) {
-        return ExpansionPanel(
-          headerBuilder: (BuildContext context, bool isExpanded) {
-            return ListTile(
-              title: Text(item.headerValue,
+      children: _data.map<ExpansionPanel>(
+        (Item item) {
+          return ExpansionPanel(
+            headerBuilder: (BuildContext context, bool isExpanded) {
+              return ListTile(
+                title: Text(
+                  item.headerValue,
                   style: TextStyle(
                     color: const Color(0xFF064789),
                     fontWeight: FontWeight.bold,
-                  )),
-            );
-          },
-          body: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: base_Dropdown(
-                      dropdownValue: zonaTextController,
-                      items: items,
-                      labelText: 'Marca',
-                    ),
                   ),
-                  Expanded(
-                    child: base_TextFormField(
-                      nombreTextController: horaTextController,
-                      labelText: 'Año',
+                ),
+              );
+            },
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: base_DropdownButton(
+                        dropdownValue: zonaTextController,
+                        items: items,
+                        labelText: 'Marca',
+                        selectedIndex: 0,
+                      ),
                     ),
-                  )
-                ],
-              ),
-              ListTile(
-                  trailing: const Icon(
-                    Icons.add,
-                  ),
-                  onTap: () {}),
-            ],
-          ),
-          isExpanded: item.isExpanded,
-        );
-      }).toList(),
+                    Expanded(
+                      child: base_TextFormField(
+                        nombreTextController: horaTextController,
+                        labelText: 'Año',
+                      ),
+                    )
+                  ],
+                ),
+                ListTile(
+                    trailing: const Icon(
+                      Icons.add,
+                    ),
+                    onTap: () {}),
+              ],
+            ),
+            isExpanded: item.isExpanded,
+          );
+        },
+      ).toList(),
     );
   }
 }

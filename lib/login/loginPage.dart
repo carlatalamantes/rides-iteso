@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
+import 'package:rides_iteso/rides/ridesPage.dart';
 import 'package:rides_iteso/signup/signupPage.dart';
 
 class LoginPage extends StatefulWidget {
@@ -66,7 +67,12 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  iniciarSessionButton(BuildContext context) {}
+  iniciarSessionButton(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => RidesPage()),
+    );
+  }
 
   registrarmeButton(BuildContext context) {
     Navigator.push(

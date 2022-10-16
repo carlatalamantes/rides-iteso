@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:rides_iteso/signup/driver/conductor_Car.dart';
-import 'package:rides_iteso/signup/passenger/pasajero_Pickup.dart';
+import 'package:rides_iteso/rides/conductor_Car.dart';
+import 'package:rides_iteso/rides/pasajero_Pickup.dart';
 
-class CompleteProfilePage extends StatefulWidget {
-  CompleteProfilePage({Key? key}) : super(key: key);
+class RidesPage extends StatefulWidget {
+  RidesPage({Key? key}) : super(key: key);
 
   @override
-  _CompleteProfilePageState createState() => _CompleteProfilePageState();
+  _RidesPageState createState() => _RidesPageState();
 }
 
-class _CompleteProfilePageState extends State<CompleteProfilePage> {
+class _RidesPageState extends State<RidesPage> {
   bool isDriver = true;
 
   @override
@@ -51,13 +51,15 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
                                 : Colors.grey,
                             size: 50,
                           ), // <-- Icon
-                          Text("CONDUCTOR",
-                              style: TextStyle(
-                                  color: isDriver
-                                      ? const Color(0xFF064789)
-                                      : Colors.grey,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18)), // <-- Text
+                          Text(
+                            "CONDUCTOR",
+                            style: TextStyle(
+                                color: isDriver
+                                    ? const Color(0xFF064789)
+                                    : Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18),
+                          ), // <-- Text
                         ],
                       ),
                     ),
@@ -78,13 +80,15 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
                                 : const Color(0xFF064789),
                             size: 50,
                           ), // <-- Icon
-                          Text("PASAJERO",
-                              style: TextStyle(
-                                  color: isDriver
-                                      ? Colors.grey
-                                      : const Color(0xFF064789),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18)), // <-- Text
+                          Text(
+                            "PASAJERO",
+                            style: TextStyle(
+                                color: isDriver
+                                    ? Colors.grey
+                                    : const Color(0xFF064789),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18),
+                          ), // <-- Text
                         ],
                       ),
                     ),

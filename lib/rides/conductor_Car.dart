@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rides_iteso/components/base_Dropdown.dart';
+import 'package:rides_iteso/components/base_DropdownButton.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
-import 'package:rides_iteso/signup/driver/conductor_Pickup.dart';
+import 'package:rides_iteso/pickupConductor/conductor_Pickup.dart';
 
 Widget ConductorCarPage(BuildContext context) {
   var anioTextController = TextEditingController();
@@ -31,20 +31,23 @@ Widget ConductorCarPage(BuildContext context) {
         nombreTextController: anioTextController,
         labelText: 'Año',
       ),
-      base_Dropdown(
+      base_DropdownButton(
         dropdownValue: marcaTextController,
         items: items,
         labelText: 'Marca',
+        selectedIndex: 0,
       ),
-      base_Dropdown(
+      base_DropdownButton(
         dropdownValue: modeloTextController,
         items: items,
         labelText: 'Modelo',
+        selectedIndex: 0,
       ),
-      base_Dropdown(
+      base_DropdownButton(
         dropdownValue: colorTextController,
         items: items,
         labelText: 'Color',
+        selectedIndex: 0,
       ),
       base_TextFormField(
         nombreTextController: pasajerosTextController,
@@ -53,10 +56,11 @@ Widget ConductorCarPage(BuildContext context) {
       const SizedBox(
         height: 10,
       ),
-      base_Dropdown(
+      base_DropdownButton(
         dropdownValue: colorTextController,
         items: items,
         labelText: 'Zonas de drop off',
+        selectedIndex: 0,
       ),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),

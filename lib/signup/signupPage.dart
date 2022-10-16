@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
-import 'package:rides_iteso/signup/completeProfile.dart';
+import 'package:rides_iteso/rides/ridesPage.dart';
 
 class SignupPage extends StatefulWidget {
   SignupPage({Key? key}) : super(key: key);
@@ -56,21 +57,12 @@ class _SignupPageState extends State<SignupPage> {
                 nombreTextController: repPsswrdTextController,
                 labelText: 'Repetir contraseña',
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      minimumSize: const Size.fromHeight(50),
-                      backgroundColor: const Color(0xFF064789)),
-                  onPressed: () {
-                    crearCuentaButton(context);
-                  },
-                  child: const Text('CREAR CUENTA'),
-                ),
+              base_ElevatedButton(
+                text: 'CREAR CUENTA',
+                backgroundColor: const Color(0xFF064789),
+                onPressed: () {
+                  crearCuentaButton(context);
+                },
               ),
             ],
           ),
@@ -82,7 +74,7 @@ class _SignupPageState extends State<SignupPage> {
   crearCuentaButton(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => CompleteProfilePage()),
+      MaterialPageRoute(builder: (context) => RidesPage()),
     );
   }
 }
