@@ -1,4 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:rides_iteso/components/base_ElevatedButton.dart';
+import 'package:rides_iteso/components/base_TextFormField.dart';
+import 'package:rides_iteso/rides/rides_page.dart';
+
+class CarRegisterPage extends StatelessWidget {
+  CarRegisterPage({super.key});
+  var nombreTextController = TextEditingController();
+  var apPatTextController = TextEditingController();
+  var apMatTextController = TextEditingController();
+  var emailTextController = TextEditingController();
+  var psswrdTextController = TextEditingController();
+  var repPsswrdTextController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.black,
+        elevation: 0.0,
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Center(
+          child: Column(
+            children: [
+              base_TextFormField(
+                nombreTextController: nombreTextController,
+                labelText: 'Marca',
+              ),
+              base_TextFormField(
+                nombreTextController: apPatTextController,
+                labelText: 'Modelo',
+              ),
+              base_TextFormField(
+                nombreTextController: apMatTextController,
+                labelText: 'Color',
+              ),
+              base_ElevatedButton(
+                text: 'REGISTRAR AUTO',
+                backgroundColor: const Color(0xFF064789),
+                onPressed: () {
+                  crearCuentaButton(context);
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  crearCuentaButton(BuildContext context) {
+    Navigator.pop(context);
+  }
+}
+
+
+
+
+/*
+import 'package:flutter/material.dart';
 import 'package:rides_iteso/components/base_DropdownButton.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
 
@@ -90,3 +151,4 @@ class CarRegisterPage extends StatelessWidget {
     );
   }
 }
+*/

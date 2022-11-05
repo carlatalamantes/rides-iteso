@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/rides/passenger/passenger_card.dart';
 
 class Item {
@@ -63,6 +64,11 @@ class _PassengerRidePageState extends State<PassengerRidePage> {
               height: 10,
             ),
             _buildPanel(),
+            base_ElevatedButton(
+              text: "Test",
+              backgroundColor: const Color(0xFF064789),
+              onPressed: () {},
+            )
           ],
         ),
       ),
@@ -99,20 +105,30 @@ class _PassengerRidePageState extends State<PassengerRidePage> {
       },
       isExpanded: item.isExpanded,
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: const [
           PassengerCard(
-            ride:{
-            "name": "Juan Perez torrez ",
-            "brand": 'Nissan',
-            "model": 'Versa',
-            "color": 'Rojo',
-            "location": 'Plaza del Sol',
-            "registererd": "3",
-            "passengerLimit": "4",
-            "time": "16:00"
+            ride: {
+              "name": "Juan Perez torrez ",
+              "brand": 'Nissan',
+              "model": 'Versa',
+              "color": 'Rojo',
+              "location": 'Plaza del Sol',
+              "registererd": "3",
+              "passengerLimit": "4",
+              "time": "16:00",
             },
           ),
-          Text("+ Buscar ride"), //"Nissan Versa Rojo"
+          Padding(
+            padding: EdgeInsets.only(left: 10),
+            child: Text(
+              "+ Buscar ride",
+              style: TextStyle(
+                color: Color(0xFF064789),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
           SizedBox(
             height: 10,
           )
@@ -120,43 +136,4 @@ class _PassengerRidePageState extends State<PassengerRidePage> {
       ),
     );
   }
-
 }
-
-/*
-  Widget OldBody() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: base_DropdownButton(
-                dropdownValue: zonaTextController,
-                items: items,
-                labelText: 'Marca',
-                selectedIndex: 0,
-              ),
-            ),
-            Expanded(
-              child: base_TextFormField(
-                nombreTextController: horaTextController,
-                labelText: 'Año',
-                keyboardType: TextInputType.number,
-              ),
-            )
-          ],
-        ),
-        ListTile(
-          leading: const Icon(
-            Icons.add,
-          ),
-          title: const Text("Añadir punto"),
-          onTap: () {},
-        ),
-      ],
-    );
-  }
-*/

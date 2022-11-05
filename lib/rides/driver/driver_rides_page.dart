@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/rides/driver/driver_card.dart';
 import 'package:rides_iteso/rides/passenger/passenger_card.dart';
 
@@ -50,20 +51,20 @@ class _PassengerRidePageState extends State<DriverRidePage> {
       padding: const EdgeInsets.all(20),
       child: Center(
         child: Column(
-          children: const [
-            SizedBox(
+          children: [
+            const SizedBox(
               height: 40,
             ),
-            Center(
+            const Center(
               child: Text(
                 'Pickup',
                 style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            DriverCard(
+            const DriverCard(
               ride: {
                 "name": "Juan Perez torrez ",
                 "brand": 'Nissan',
@@ -76,6 +77,11 @@ class _PassengerRidePageState extends State<DriverRidePage> {
                 "day": [1, 0, 0, 0, 0, 0, 0],
               },
             ),
+            base_ElevatedButton(
+              text: "Test",
+              backgroundColor: const Color(0xFF064789),
+              onPressed: () {},
+            )
           ],
         ),
       ),

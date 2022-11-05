@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rides_iteso/rides/driver/conductor_car.dart';
 import 'package:rides_iteso/rides/driver/driver_rides_page.dart';
 import 'package:rides_iteso/rides/pass_driv_button.dart';
 import 'package:rides_iteso/rides/passenger/passenger_ride_page.dart';
@@ -18,7 +17,7 @@ class _RidesPageState extends State<RidesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(10),
         child: Center(
           child: Column(
             children: [
