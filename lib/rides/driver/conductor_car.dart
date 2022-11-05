@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:rides_iteso/components/base_DropdownButton.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
-import 'package:rides_iteso/pickupConductor/conductor_Pickup.dart';
+class name extends StatelessWidget {
+  const name({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+
 
 Widget ConductorCarPage(BuildContext context) {
   var anioTextController = TextEditingController();
@@ -19,10 +28,6 @@ Widget ConductorCarPage(BuildContext context) {
   ];
 
   guardarButton(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => ConductorPickupPage()),
-    );
   }
 
   return Column(

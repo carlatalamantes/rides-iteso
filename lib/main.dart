@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:rides_iteso/login/loginPage.dart';
-import 'package:rides_iteso/rides/pasajero_Pickup.dart';
+import 'package:rides_iteso/car_register/car_register_page.dart';
+import 'package:rides_iteso/login/login_page.dart';
+import 'package:rides_iteso/rides/passenger/passenger_ride_page.dart';
+import 'package:rides_iteso/rides/rides_page.dart';
 import 'package:rides_iteso/signup/signupPage.dart';
-import 'package:rides_iteso/test/testPage.dart';
-
-import 'pickupConductor/conductor_Pickup.dart';
 
 void main() => runApp(const MyApp());
 
@@ -13,6 +12,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Material App', home: ConductorPickupPage());
+    return MaterialApp(
+      title: 'Material App',
+      home: 
+      //LoginPage()
+      //SignupPage()
+      RidesPage()
+      //CarRegisterPage()
+    );
   }
 }

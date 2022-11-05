@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
-import 'package:rides_iteso/rides/ridesPage.dart';
+import 'package:rides_iteso/rides/rides_page.dart';
 
 class SignupPage extends StatefulWidget {
   SignupPage({Key? key}) : super(key: key);
