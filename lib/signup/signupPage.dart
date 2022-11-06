@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
+import 'package:rides_iteso/login/login_page.dart';
 import 'package:rides_iteso/rides/rides_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../auth.dart';
@@ -19,15 +20,26 @@ class SignupPage extends StatelessWidget {
       GlobalKey<ScaffoldMessengerState>();
   final _formKey = GlobalKey<FormState>();
 
-  Future<void> signUp() async {
+  Future<void> signUp(BuildContext context) async {
     try {
-      await Auth().createUserWithEmailAndPassword(
-        email: emailTextController.text,
-        password: psswrdTextController.text,
-        name: nombreTextController.text,
-        lastName: apPatTextController.text,
-        secondLastName: apMatTextController.text,
-      );
+      await Auth()
+          .createUserWithEmailAndPassword(
+            email: emailTextController.text,
+            password: psswrdTextController.text,
+            name: nombreTextController.text,
+            lastName: apPatTextController.text,
+            secondLastName: apMatTextController.text,
+          )
+          .then((value) => _formKey.currentState?.reset());
+      scaffoldMessengerKey.currentState?.showSnackBar(const SnackBar(
+          content: Text("Usuario creado"), backgroundColor: Colors.green));
+      // ignore: use_build_context_synchronously
+      Future.delayed(const Duration(seconds: 4), () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LoginPage()),
+        );
+      });
     } on FirebaseAuthException catch (e) {
       var errorMessage = e.message ?? 'Error Firebase Auth Signup';
       scaffoldMessengerKey.currentState?.showSnackBar(
@@ -55,12 +67,12 @@ class SignupPage extends StatelessWidget {
                       base_TextFormField(
                         textController: nombreTextController,
                         labelText: 'Nombre(s) *',
-                        isRequired: false,
+                        isRequired: true,
                       ),
                       base_TextFormField(
                         textController: apPatTextController,
                         labelText: 'Apellido paterno *',
-                        isRequired: false,
+                        isRequired: true,
                       ),
                       base_TextFormField(
                         textController: apMatTextController,
@@ -70,18 +82,18 @@ class SignupPage extends StatelessWidget {
                       base_TextFormField(
                           textController: emailTextController,
                           labelText: 'Correo electrónico *',
-                          isRequired: false,
+                          isRequired: true,
                           keyboardType: TextInputType.emailAddress),
                       base_TextFormField(
                         textController: psswrdTextController,
                         labelText: 'Contraseña *',
-                        isRequired: false,
+                        isRequired: true,
                         isPassword: true,
                       ),
                       base_TextFormField(
                         textController: repPsswrdTextController,
                         labelText: 'Repetir contraseña *',
-                        isRequired: false,
+                        isRequired: true,
                         isPassword: true,
                       ),
                       base_ElevatedButton(
@@ -100,7 +112,7 @@ class SignupPage extends StatelessWidget {
 
   crearCuentaButton(BuildContext context) {
     if (_formKey.currentState!.validate()) {
-      signUp();
+      signUp(context);
     }
   }
 }
