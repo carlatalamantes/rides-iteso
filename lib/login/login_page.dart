@@ -27,10 +27,6 @@ class _LoginPageState extends State<LoginPage> {
         email: emailTextController.text,
         password: psswrdTextController.text,
       );
-      /*  Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => RidesPage()),
-      ); */
     } on FirebaseAuthException catch (e) {
       var errorMessage = e.message ?? 'Error Firebase Auth Login';
       scaffoldMessengerKey.currentState?.showSnackBar(
