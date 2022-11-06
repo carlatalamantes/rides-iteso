@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/rides/driver/driver_rides_page.dart';
 import 'package:rides_iteso/rides/pass_driv_button.dart';
 import 'package:rides_iteso/rides/passenger/passenger_ride_page.dart';
+
+import '../auth.dart';
 
 class RidesPage extends StatefulWidget {
   RidesPage({Key? key}) : super(key: key);
@@ -12,6 +15,10 @@ class RidesPage extends StatefulWidget {
 
 class _RidesPageState extends State<RidesPage> {
   bool isDriver = true;
+
+  Future<void> signOut() async {
+    await Auth().signOut();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,22 +44,30 @@ class _RidesPageState extends State<RidesPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   PassDrivButton(
-                    isDriver: isDriver,
-                    icon: Icons.car_rental,
-                    text: "CONDUCTOR",
-                    func: (){handleViewChange(context);}
-                  ),
+                      isDriver: isDriver,
+                      icon: Icons.car_rental,
+                      text: "CONDUCTOR",
+                      func: () {
+                        handleViewChange(context);
+                      }),
                   PassDrivButton(
-                    isDriver: !isDriver,
-                    icon: Icons.person,
-                    text: "PASAJERO",
-                    func: (){handleViewChange(context);}
-                  ),
+                      isDriver: !isDriver,
+                      icon: Icons.person,
+                      text: "PASAJERO",
+                      func: () {
+                        handleViewChange(context);
+                      }),
                 ],
               ),
-              isDriver
-                  ? DriverRidePage()
-                  : PassengerRidePage(),
+              isDriver ? DriverRidePage() : PassengerRidePage(),
+              base_ElevatedButton(
+                text: 'SALIR',
+                backgroundColor: Colors.white,
+                textColor: const Color(0xFF064789),
+                onPressed: () {
+                  signOut();
+                },
+              )
             ],
           ),
         ),
