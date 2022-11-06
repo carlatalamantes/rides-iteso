@@ -5,12 +5,9 @@ import 'package:rides_iteso/rides/rides_page.dart';
 
 class CarRegisterPage extends StatelessWidget {
   CarRegisterPage({super.key});
-  var nombreTextController = TextEditingController();
-  var apPatTextController = TextEditingController();
-  var apMatTextController = TextEditingController();
-  var emailTextController = TextEditingController();
-  var psswrdTextController = TextEditingController();
-  var repPsswrdTextController = TextEditingController();
+  var marcaTextController = TextEditingController();
+  var modeloTextController = TextEditingController();
+  var colorTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,22 +22,30 @@ class CarRegisterPage extends StatelessWidget {
           child: Column(
             children: [
               base_TextFormField(
-                nombreTextController: nombreTextController,
+                textController: marcaTextController,
                 labelText: 'Marca',
               ),
               base_TextFormField(
-                nombreTextController: apPatTextController,
+                textController: modeloTextController,
                 labelText: 'Modelo',
               ),
               base_TextFormField(
-                nombreTextController: apMatTextController,
+                textController: colorTextController,
                 labelText: 'Color',
               ),
               base_ElevatedButton(
                 text: 'REGISTRAR AUTO',
                 backgroundColor: const Color(0xFF064789),
                 onPressed: () {
-                  crearCuentaButton(context);
+                  registrarAutoButton(context);
+                },
+              ),
+              base_ElevatedButton(
+                text: 'Cancelar',
+                backgroundColor: Colors.white,
+                textColor: const Color(0xFF064789),
+                onPressed: () {
+                  cancelarButton(context);
                 },
               ),
             ],
@@ -50,7 +55,13 @@ class CarRegisterPage extends StatelessWidget {
     );
   }
 
-  crearCuentaButton(BuildContext context) {
+  cancelarButton(BuildContext context) {
+    print("cacelar");
+    Navigator.pop(context);
+  }
+
+  registrarAutoButton(BuildContext context) {
+    print("RegistrarAuto");
     Navigator.pop(context);
   }
 }

@@ -60,13 +60,13 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         children: [
                           base_TextFormField(
-                            nombreTextController: emailTextController,
+                            textController: emailTextController,
                             labelText: 'Correo electrónico *',
                             isRequired: true,
                             keyboardType: TextInputType.emailAddress,
                           ),
                           base_TextFormField(
-                            nombreTextController: psswrdTextController,
+                            textController: psswrdTextController,
                             labelText: 'Contraseña *',
                             isRequired: true,
                             isPassword: true,

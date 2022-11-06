@@ -53,33 +53,33 @@ class SignupPage extends StatelessWidget {
                   child: Column(
                     children: [
                       base_TextFormField(
-                        nombreTextController: nombreTextController,
+                        textController: nombreTextController,
                         labelText: 'Nombre(s) *',
                         isRequired: false,
                       ),
                       base_TextFormField(
-                        nombreTextController: apPatTextController,
+                        textController: apPatTextController,
                         labelText: 'Apellido paterno *',
                         isRequired: false,
                       ),
                       base_TextFormField(
-                        nombreTextController: apMatTextController,
+                        textController: apMatTextController,
                         labelText: 'Apellido materno',
                       ),
                       const SizedBox(height: 10),
                       base_TextFormField(
-                          nombreTextController: emailTextController,
+                          textController: emailTextController,
                           labelText: 'Correo electrónico *',
                           isRequired: false,
                           keyboardType: TextInputType.emailAddress),
                       base_TextFormField(
-                        nombreTextController: psswrdTextController,
+                        textController: psswrdTextController,
                         labelText: 'Contraseña *',
                         isRequired: false,
                         isPassword: true,
                       ),
                       base_TextFormField(
-                        nombreTextController: repPsswrdTextController,
+                        textController: repPsswrdTextController,
                         labelText: 'Repetir contraseña *',
                         isRequired: false,
                         isPassword: true,

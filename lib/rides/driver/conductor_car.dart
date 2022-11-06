@@ -33,7 +33,7 @@ Widget ConductorCarPage(BuildContext context) {
   return Column(
     children: [
       base_TextFormField(
-        nombreTextController: anioTextController,
+        textController: anioTextController,
         labelText: 'Año',
       ),
       base_DropdownButton(
@@ -55,7 +55,7 @@ Widget ConductorCarPage(BuildContext context) {
         selectedIndex: 0,
       ),
       base_TextFormField(
-        nombreTextController: pasajerosTextController,
+        textController: pasajerosTextController,
         labelText: 'Pasajeros que puedo transportar',
       ),
       const SizedBox(
