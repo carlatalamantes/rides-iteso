@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "513594162140",
+    "project_id": "ridesiteso",
+    "storage_bucket": "ridesiteso.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:513594162140:android:d5007be96f552583a26d19",
+        "android_client_info": {
+          "package_name": "com.example.rides_iteso"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "513594162140-fciphjospsmalqt7aj3k6cpu8vf8o3kf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKhl_YWt29xMY_W0L3SV_NYR7BuuVM30k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "513594162140-fciphjospsmalqt7aj3k6cpu8vf8o3kf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
