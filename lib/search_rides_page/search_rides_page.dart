@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
 import 'package:rides_iteso/rides/rides_page.dart';
+import 'package:rides_iteso/search_rides_page/search_ride_card.dart';
 
-class CarRegisterPage extends StatelessWidget {
-  CarRegisterPage({super.key});
-  var marcaTextController = TextEditingController();
-  var modeloTextController = TextEditingController();
-  var colorTextController = TextEditingController();
+class SearchRegisterPage extends StatelessWidget {
+  SearchRegisterPage({super.key});
+  var diaTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,30 +20,27 @@ class CarRegisterPage extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: Image(
-                  image: AssetImage('assets/images/logo_blue.png'),
-                  height: 200,
-                ),
-              ),
               base_TextFormField(
-                textController: marcaTextController,
-                labelText: 'Marca',
-              ),
-              base_TextFormField(
-                textController: modeloTextController,
-                labelText: 'Modelo',
-              ),
-              base_TextFormField(
-                textController: colorTextController,
-                labelText: 'Color',
+                textController: diaTextController,
+                labelText: 'Dia',
               ),
               base_ElevatedButton(
-                text: 'REGISTRAR AUTO',
+                text: 'Buscar Ride',
                 backgroundColor: const Color(0xFF064789),
                 onPressed: () {
                   registrarAutoButton(context);
+                },
+              ),
+              const SearchCard(
+                ride: {
+                  "name": "Juan Perez torrez ",
+                  "brand": 'Nissan',
+                  "model": 'Versa',
+                  "color": 'Rojo',
+                  "location": 'Plaza del Sol',
+                  "registererd": "3",
+                  "passengerLimit": "4",
+                  "time": "16:00",
                 },
               ),
               base_ElevatedButton(
