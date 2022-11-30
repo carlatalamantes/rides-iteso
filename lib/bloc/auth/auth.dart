@@ -44,7 +44,7 @@ class Auth {
         'name': name,
         'lastName': lastName,
         'secondLastName': secondLastName,
-      }).then((value) => signOut());
+      });
     });
   }
 

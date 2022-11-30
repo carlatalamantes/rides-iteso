@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rides_iteso/car_register/car_register_Page.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/rides/driver/driver_card.dart';
 import 'package:rides_iteso/rides/passenger/passenger_card.dart';
@@ -25,6 +26,7 @@ class DriverRidePage extends StatefulWidget {
 }
 
 class _PassengerRidePageState extends State<DriverRidePage> {
+  var hasCar = false;
   final List<Item> _data = [
     Item(expandedValue: "Expanded", headerValue: "LUNES"),
     Item(expandedValue: "Expanded", headerValue: "MARTES"),
@@ -51,9 +53,6 @@ class _PassengerRidePageState extends State<DriverRidePage> {
       child: Center(
         child: Column(
           children: [
-            const SizedBox(
-              height: 40,
-            ),
             const Center(
               child: Text(
                 'Pickup',
@@ -77,8 +76,19 @@ class _PassengerRidePageState extends State<DriverRidePage> {
               },
             ),
             base_ElevatedButton(
-              text: "Test",
+              text: hasCar ? "EDITAR AUTOMOVIL" : "REGISTRAR AUTOMOVIL",
               backgroundColor: const Color(0xFF064789),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CarRegisterPage()),
+                );
+              },
+            ),
+            base_ElevatedButton(
+              text: "NUEVO RIDE",
+              backgroundColor: Colors.white,
+              textColor: const Color(0xFF064789),
               onPressed: () {},
             )
           ],

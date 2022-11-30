@@ -1,15 +1,20 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:rides_iteso/ride_register/ride_register_page.dart';
-import 'package:rides_iteso/search_rides_page/search_rides_page.dart';
-import 'package:rides_iteso/widget_tree.dart';
-
-import 'car_register/car_register_Page.dart';
+import 'package:rides_iteso/bloc/auth/auth_bloc.dart';
+import 'package:rides_iteso/login/login_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider<AuthBloc>(
+        create: (context) => AuthBloc(),
+      ),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -18,11 +23,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Material App',
-      home: Scaffold(
-        body: CarRegisterPage(),
-      ),
-    );
+        title: 'Rides ITESO',
+        home: const LoginPage(),
+        theme: ThemeData(
+            primaryColor: Colors.blue.shade900,
+            appBarTheme: const AppBarTheme(
+              iconTheme: IconThemeData(color: Colors.black),
+              backgroundColor: Colors.transparent,
+            )));
   }
 }
 /*

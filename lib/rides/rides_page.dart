@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rides_iteso/bloc/auth/auth_bloc.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
+import 'package:rides_iteso/login/login_page.dart';
 import 'package:rides_iteso/rides/driver/driver_rides_page.dart';
 import 'package:rides_iteso/rides/pass_driv_button.dart';
 import 'package:rides_iteso/rides/passenger/passenger_ride_page.dart';
 
-import '../auth.dart';
+import '../bloc/auth/auth.dart';
 
 class RidesPage extends StatefulWidget {
   RidesPage({Key? key}) : super(key: key);
@@ -17,20 +20,40 @@ class _RidesPageState extends State<RidesPage> {
   bool isDriver = true;
 
   Future<void> signOut() async {
-    await Auth().signOut();
+    BlocProvider.of<AuthBloc>(context).add(SignOutRequested());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.black,
+        elevation: 0.0,
+        actions: [
+          BlocConsumer<AuthBloc, AuthState>(
+            listener: (context, state) {
+              if (state is UnAuthenticated) {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => const LoginPage(),
+                  ),
+                );
+              }
+            },
+            builder: (context, state) {
+              return IconButton(
+                  onPressed: () => signOut(),
+                  icon: const Icon(Icons.logout_outlined));
+            },
+          )
+        ],
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(10),
         child: Center(
           child: Column(
             children: [
-              const SizedBox(
-                height: 40,
-              ),
               const Center(
                 child: Text(
                   'Yo soy',
@@ -59,15 +82,7 @@ class _RidesPageState extends State<RidesPage> {
                       }),
                 ],
               ),
-              isDriver ? DriverRidePage() : PassengerRidePage(),
-              base_ElevatedButton(
-                text: 'SALIR',
-                backgroundColor: Colors.white,
-                textColor: const Color(0xFF064789),
-                onPressed: () {
-                  signOut();
-                },
-              )
+              isDriver ? DriverRidePage() : const PassengerRidePage(),
             ],
           ),
         ),

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rides_iteso/bloc/auth/auth_bloc.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
-import 'package:rides_iteso/login/login_page.dart';
 import 'package:rides_iteso/rides/rides_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import '../auth.dart';
 
 class SignupPage extends StatelessWidget {
   SignupPage({super.key});
@@ -21,30 +20,15 @@ class SignupPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   Future<void> signUp(BuildContext context) async {
-    try {
-      await Auth()
-          .createUserWithEmailAndPassword(
-            email: emailTextController.text,
-            password: psswrdTextController.text,
-            name: nombreTextController.text,
-            lastName: apPatTextController.text,
-            secondLastName: apMatTextController.text,
-          )
-          .then((value) => _formKey.currentState?.reset());
-      scaffoldMessengerKey.currentState?.showSnackBar(const SnackBar(
-          content: Text("Usuario creado"), backgroundColor: Colors.green));
-      // ignore: use_build_context_synchronously
-      Future.delayed(const Duration(seconds: 4), () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => LoginPage()),
-        );
-      });
-    } on FirebaseAuthException catch (e) {
-      var errorMessage = e.message ?? 'Error Firebase Auth Signup';
-      scaffoldMessengerKey.currentState?.showSnackBar(
-          SnackBar(content: Text(errorMessage), backgroundColor: Colors.red));
-    }
+    BlocProvider.of<AuthBloc>(context).add(
+      SignUpRequested(
+        emailTextController.text.trim(),
+        psswrdTextController.text.trim(),
+        nombreTextController.text.trim(),
+        apPatTextController.text.trim(),
+        apMatTextController.text.trim(),
+      ),
+    );
   }
 
   @override
@@ -59,53 +43,69 @@ class SignupPage extends StatelessWidget {
         ),
         body: SingleChildScrollView(
             padding: const EdgeInsets.all(20),
-            child: Form(
-                key: _formKey,
-                child: Center(
-                  child: Column(
-                    children: [
-                      base_TextFormField(
-                        textController: nombreTextController,
-                        labelText: 'Nombre(s) *',
-                        isRequired: true,
+            child: BlocConsumer<AuthBloc, AuthState>(
+              listener: (context, state) {
+                if (state is Authenticated) {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => RidesPage(),
+                    ),
+                  );
+                }
+                if (state is AuthError) {
+                  scaffoldMessengerKey.currentState?.showSnackBar(
+                    SnackBar(
+                      content: Text(state.error),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                }
+              },
+              builder: (context, state) {
+                return Form(
+                    key: _formKey,
+                    child: Center(
+                      child: Column(
+                        children: [
+                          base_TextFormField(
+                            textController: nombreTextController,
+                            labelText: 'Nombre(s) *',
+                            isRequired: true,
+                          ),
+                          base_TextFormField(
+                            textController: apPatTextController,
+                            labelText: 'Apellido paterno *',
+                            isRequired: true,
+                          ),
+                          base_TextFormField(
+                            textController: apMatTextController,
+                            labelText: 'Apellido materno',
+                          ),
+                          const SizedBox(height: 10),
+                          base_TextFormField(
+                              textController: emailTextController,
+                              labelText: 'Correo electrónico *',
+                              isRequired: true,
+                              keyboardType: TextInputType.emailAddress),
+                          base_TextFormField(
+                            textController: psswrdTextController,
+                            labelText: 'Contraseña *',
+                            isRequired: true,
+                            isPassword: true,
+                          ),
+                          base_ElevatedButton(
+                            text: 'CREAR CUENTA',
+                            backgroundColor: const Color(0xFF064789),
+                            onPressed: () {
+                              crearCuentaButton(context);
+                            },
+                          ),
+                        ],
                       ),
-                      base_TextFormField(
-                        textController: apPatTextController,
-                        labelText: 'Apellido paterno *',
-                        isRequired: true,
-                      ),
-                      base_TextFormField(
-                        textController: apMatTextController,
-                        labelText: 'Apellido materno',
-                      ),
-                      const SizedBox(height: 10),
-                      base_TextFormField(
-                          textController: emailTextController,
-                          labelText: 'Correo electrónico *',
-                          isRequired: true,
-                          keyboardType: TextInputType.emailAddress),
-                      base_TextFormField(
-                        textController: psswrdTextController,
-                        labelText: 'Contraseña *',
-                        isRequired: true,
-                        isPassword: true,
-                      ),
-                      base_TextFormField(
-                        textController: repPsswrdTextController,
-                        labelText: 'Repetir contraseña *',
-                        isRequired: true,
-                        isPassword: true,
-                      ),
-                      base_ElevatedButton(
-                        text: 'CREAR CUENTA',
-                        backgroundColor: const Color(0xFF064789),
-                        onPressed: () {
-                          crearCuentaButton(context);
-                        },
-                      ),
-                    ],
-                  ),
-                ))),
+                    ));
+              },
+            )),
       ),
     );
   }

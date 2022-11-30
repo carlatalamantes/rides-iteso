@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rides_iteso/auth.dart';
+import 'package:rides_iteso/bloc/auth/auth.dart';
 import 'package:rides_iteso/login/login_page.dart';
 import 'package:rides_iteso/rides/rides_page.dart';
 
