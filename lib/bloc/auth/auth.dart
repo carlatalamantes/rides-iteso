@@ -46,7 +46,7 @@ class Auth {
         'name': name,
         'lastName': lastName,
         'secondLastName': secondLastName,
-        'firstLogin': true
+        'firstLogin': true,
       });
     });
   }
@@ -57,6 +57,12 @@ class Auth {
 
   Future<DocumentSnapshot> getUserData() async {
     return _firestore.collection('users').doc(currentUser!.uid).get();
+  }
+
+  Future<String> getUserId() async {
+    DocumentSnapshot<Map<String, dynamic>> snapshot =
+        await _firestore.collection('users').doc(currentUser!.uid).get();
+    return snapshot.data()!['uuid'];
   }
 
   Future<bool> isUserFirstLogin() async {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rides_iteso/car_register/car_register_Page.dart';
 import 'package:rides_iteso/rides/pass_driv_button.dart';
 
 class DriverPassengerPage extends StatelessWidget {
@@ -20,8 +21,13 @@ class DriverPassengerPage extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const Text("Que eres?",style: TextStyle(fontSize: 30, color: Color(0xFF064789)),),
-                const SizedBox(height: 40,),
+                const Text(
+                  "Yo soy",
+                  style: TextStyle(fontSize: 30, color: Color(0xFF064789)),
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
                 Column(
                   children: [
                     PassDrivButton(
@@ -29,7 +35,7 @@ class DriverPassengerPage extends StatelessWidget {
                       icon: Icons.person,
                       text: "PASAJERO",
                       func: () {
-                        imDriver(context);
+                        imPassenger(context);
                       },
                     ),
                     const SizedBox(
@@ -40,7 +46,7 @@ class DriverPassengerPage extends StatelessWidget {
                       icon: Icons.car_rental,
                       text: "CONDUCTOR",
                       func: () {
-                        (context);
+                        imDriver(context);
                       },
                     ),
                   ],
@@ -58,9 +64,13 @@ class DriverPassengerPage extends StatelessWidget {
 
   void imDriver(BuildContext context) {
     print("driver");
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) => const CarRegisterPage()),
+    );
   }
 
   void imPassenger(BuildContext context) {
     print("driver");
+    //TODO: implementar
   }
 }

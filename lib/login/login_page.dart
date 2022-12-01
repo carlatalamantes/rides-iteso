@@ -60,7 +60,6 @@ class _LoginPageState extends State<LoginPage> {
                         );
                       }
                     });
-                    /*   */
                   }
                   if (state is AuthError) {
                     scaffoldMessengerKey.currentState?.showSnackBar(

@@ -7,7 +7,7 @@ class UserC {
   User? get currentUser => _firebaseAuth.currentUser;
 
   Future<void> getUserCar() async {
-    await _firestore.collection('cars').doc(currentUser!.uid).get();
+    await _firestore.collection('users').doc(currentUser!.uid).get();
   }
 
   Future<void> createUserCar({
@@ -17,12 +17,18 @@ class UserC {
     required String carPlate,
     required String carBrand,
   }) async {
-    await _firestore.collection('cars').doc(currentUser!.uid).set({
-      'model': carModel,
-      'year': carYear,
-      'color': carColor,
-      'plate': carPlate,
-      'brand': carBrand,
-    });
+    final data = {
+      'car': {
+        'model': carModel,
+        'year': carYear,
+        'color': carColor,
+        'plate': carPlate,
+        'brand': carBrand,
+      }
+    };
+    await _firestore
+        .collection('users')
+        .doc(currentUser!.uid)
+        .set(data, SetOptions(merge: true));
   }
 }
