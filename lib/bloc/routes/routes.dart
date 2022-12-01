@@ -24,7 +24,13 @@ class RoutesC {
         'dateList': dateList[i],
         'passengers': [],
         'maxPassengers': snapshot.data()!['car']['numPas'],
-      });
+      }).then((value) => {
+            //Add document reference to route document
+            _firestore
+                .collection('routes')
+                .doc(value.id)
+                .update({'id': value.id})
+          });
     }
 
     //Change the user's firstLogin to false
@@ -56,5 +62,10 @@ class RoutesC {
       });
     });
     return routes;
+  }
+
+  //Delete route from firestore
+  Future<void> deleteRoute(String routeId) async {
+    await _firestore.collection('routes').doc(routeId).delete();
   }
 }

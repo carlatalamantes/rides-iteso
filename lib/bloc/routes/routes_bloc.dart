@@ -29,5 +29,15 @@ class RoutesBloc extends Bloc<RoutesEvent, RoutesState> {
         emit(GetRoutesError(e.toString()));
       }
     });
+
+    on<DeleteRouteRequested>((event, emit) async {
+      emit(Loading());
+      try {
+        await RoutesC().deleteRoute(event.routeId);
+        emit(DeleteRoute());
+      } catch (e) {
+        emit(DeleteRouteError(e.toString()));
+      }
+    });
   }
 }

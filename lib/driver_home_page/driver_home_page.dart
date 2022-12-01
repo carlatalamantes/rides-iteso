@@ -133,13 +133,6 @@ class _DriverHomePageState extends State<DriverHomePage> {
     );
   }
 
-  guardarButton(BuildContext context) {
-    /*   Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => SignupPage()),
-    ); */
-  }
-
   handleViewChange(context) {
     setState(() {
       isDriver = !isDriver;

@@ -1,6 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../bloc/routes/routes_bloc.dart';
 
 class DriverCard extends StatelessWidget {
   const DriverCard({
@@ -14,6 +17,7 @@ class DriverCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(ride);
     return Padding(
       padding: const EdgeInsets.only(top: 5, bottom: 5),
       child: Container(
@@ -59,7 +63,7 @@ class DriverCard extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height:10),
+              SizedBox(height: 10),
               Row(
                 children: [
                   Text(
@@ -78,18 +82,23 @@ class DriverCard extends StatelessWidget {
                       fontSize: 14,
                     ),
                   ),
-
                 ],
               ),
               const SizedBox(
                 height: 10,
               ),
               Row(
-                children: const [
-                  Spacer(),
-                  Text(
-                    "Cancel",
-                    style: TextStyle(color: Color(0xFF064789)),
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      BlocProvider.of<RoutesBloc>(context).add(
+                        DeleteRouteRequested(ride['id']),
+                      );
+                    },
+                    child: const Text(
+                      "Cancel",
+                      style: TextStyle(color: Color(0xFF064789)),
+                    ),
                   ),
                 ],
               ),

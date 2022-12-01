@@ -43,3 +43,16 @@ class GetRoutesError extends RoutesState {
   @override
   List<Object?> get props => [error];
 }
+
+//Deleting routes
+class DeleteRoute extends RoutesState {
+  @override
+  List<Object?> get props => [];
+}
+
+class DeleteRouteError extends RoutesState {
+  final String error;
+  DeleteRouteError(this.error);
+  @override
+  List<Object?> get props => [error];
+}

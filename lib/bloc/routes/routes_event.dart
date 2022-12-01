@@ -17,3 +17,9 @@ class GetRoutesRequested extends RoutesEvent {
   final bool getFutureRoutes;
   GetRoutesRequested(this.getFutureRoutes);
 }
+
+//Delete route+
+class DeleteRouteRequested extends RoutesEvent {
+  final String routeId;
+  DeleteRouteRequested(this.routeId);
+}
