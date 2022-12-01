@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rides_iteso/bloc/user/user_bloc.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
+import 'package:rides_iteso/ride_calendar/ride_calendar.dart';
 
 class RideRegisterPage extends StatefulWidget {
   RideRegisterPage({super.key});
@@ -43,15 +44,12 @@ class _RideRegisterPageState extends State<RideRegisterPage> {
               }
 
               if (state is CreateOriginDestination) {
-                //TODO: implementar navegacion a la pagina de calendario
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (context) => RideRegisterPage(),
+                    builder: (context) => const RideCalendar(),
                   ),
                 );
               }
-
-              // TODO: implement listener
             },
             builder: (context, state) {
               return Center(
