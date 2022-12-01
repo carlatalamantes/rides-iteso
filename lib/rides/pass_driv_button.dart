@@ -20,7 +20,7 @@ class PassDrivButton extends StatelessWidget {
     return GestureDetector(
       onTap: func,
       child: Container(
-        width:130,
+        width:140,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: const BorderRadius.all(
