@@ -6,6 +6,7 @@ import 'package:rides_iteso/bloc/user/user_bloc.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/driver_home_page/driver_card.dart';
 import 'package:rides_iteso/login/login_page.dart';
+import 'package:rides_iteso/passenger_home_page/passenger_card.dart';
 import 'package:rides_iteso/ride_calendar/ride_calendar.dart';
 import 'package:rides_iteso/rides/driver/driver_rides_page.dart';
 import 'package:rides_iteso/rides/pass_driv_button.dart';
@@ -13,14 +14,14 @@ import 'package:rides_iteso/rides/passenger/passenger_ride_page.dart';
 
 import '../bloc/auth/auth.dart';
 
-class DriverHomePage extends StatefulWidget {
-  const DriverHomePage({super.key});
+class PassengerHomePage extends StatefulWidget {
+  const PassengerHomePage({super.key});
 
   @override
-  State<DriverHomePage> createState() => _DriverHomePageState();
+  State<PassengerHomePage> createState() => _PassengerHomePage();
 }
 
-class _DriverHomePageState extends State<DriverHomePage> {
+class _PassengerHomePage extends State<PassengerHomePage> {
   bool isDriver = true;
   String userUid = '';
   bool getFutureRoutes = false;
@@ -87,10 +88,11 @@ class _DriverHomePageState extends State<DriverHomePage> {
                         shrinkWrap: true,
                         itemCount: state.routes.length,
                         itemBuilder: (context, index) {
-                          return DriverCard(
-                              ride: state.routes[index], index: index);
+                          return PassengerCard(
+                              ride: state.routes[index], imParticipant: false);
                         },
                       ),
+                      /*
                       base_ElevatedButton(
                         text: "AÑADIR HORARIOS",
                         backgroundColor: const Color(0xFF064789),
@@ -99,12 +101,13 @@ class _DriverHomePageState extends State<DriverHomePage> {
                         },
                       ),
                       base_ElevatedButton(
-                        text: getFutureRoutes ? "VER ACTUAL" : "VER FUTUROS",
+                        text: getFutureRoutes ? "VER PASADOS" : "VER FUTUROS",
                         backgroundColor: const Color(0xFF064789),
                         onPressed: () {
                           futuros();
                         },
                       )
+                      */
                     ],
                   ),
                 ),

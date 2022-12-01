@@ -1,20 +1,23 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:rides_iteso/components/base_ElevatedButton.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DriverNextCard extends StatelessWidget {
-  const DriverNextCard({
+import '../bloc/routes/routes_bloc.dart';
+
+class PassengerCard extends StatelessWidget {
+  const PassengerCard({
     Key? key,
     required this.ride,
-    required this.index,
+    required this.imParticipant,
   }) : super(key: key);
 
-  final int index;
   final Map<String, dynamic> ride;
+  final bool imParticipant;
 
   @override
   Widget build(BuildContext context) {
+    print(ride);
     return Padding(
       padding: const EdgeInsets.only(top: 5, bottom: 5),
       child: Container(
@@ -37,11 +40,11 @@ class DriverNextCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height:25),
+              const SizedBox(height: 25),
               Row(
                 children: [
                   Text(
-                    "De: ${ride['from']}",
+                    "De: ${ride['origin']}",
                     style: const TextStyle(
                       color: Color(0xFF064789),
                       fontWeight: FontWeight.bold,
@@ -55,31 +58,30 @@ class DriverNextCard extends StatelessWidget {
                     size: 30,
                   ),
                   Text(
-                    "${ride['registererd']}/${ride['passengerLimit']}",
+                    "${ride['passengers'].length}/${ride['maxPassengers']}",
                     style: const TextStyle(color: Colors.grey),
                   ),
                 ],
               ),
-              const SizedBox(height:10),
+              const SizedBox(height: 10),
               Row(
                 children: [
                   Text(
-                    "Hacia: ${ride['to']}",
+                    "Hacia: ${ride['destination']}",
                     style: const TextStyle(
                       color: Color(0xFF064789),
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text(
-                    "${ride['time']}",
+                    "${ride['dateList'].hour}:${ride['dateList'].minute}",
                     style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 14,
                     ),
                   ),
-
                 ],
               ),
               const SizedBox(
@@ -87,14 +89,16 @@ class DriverNextCard extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Text(
-                    "${ride['day']}",
-                    style: TextStyle(color: Color(0xFF064789)),
-                  ),
-                  const Spacer(),
-                  Text(
-                    "Cancel",
-                    style: TextStyle(color: Color(0xFF064789)),
+                  GestureDetector(
+                    onTap: () {
+                      BlocProvider.of<RoutesBloc>(context).add(
+                        DeleteRouteRequested(ride['id']),
+                      );
+                    },
+                    child: Text(
+                      (imParticipant)?"Enter":"Cancel",
+                      style: const TextStyle(color: Color(0xFF064789)),
+                    ),
                   ),
                 ],
               ),
