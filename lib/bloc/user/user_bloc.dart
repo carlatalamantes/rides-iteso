@@ -31,5 +31,28 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(CreateUserCarError(e.toString()));
       }
     });
+
+    on<CreateUserRoleRequested>((event, emit) async {
+      emit(Loading());
+      try {
+        await UserC().createUserRole(role: event.role);
+        emit(CreateUserRole(event.role));
+      } catch (e) {
+        emit(CreateUserRoleError(e.toString()));
+      }
+    });
+
+    on<CreateOriginDestinationRequested>((event, emit) async {
+      emit(Loading());
+      try {
+        await UserC().createOriginDestination(
+          origin: event.origin,
+          destination: event.destination,
+        );
+        emit(CreateOriginDestination(event.origin, event.destination));
+      } catch (e) {
+        emit(CreateOriginDestinationError(e.toString()));
+      }
+    });
   }
 }
