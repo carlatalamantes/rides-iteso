@@ -2,10 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
 
-class RideRegisterPage extends StatelessWidget {
+class RideRegisterPage extends StatefulWidget {
   RideRegisterPage({super.key});
-  var timeTextController = TextEditingController();
-  var passengersTextController = TextEditingController();
+
+  @override
+  State<RideRegisterPage> createState() => _RideRegisterPageState();
+}
+
+class _RideRegisterPageState extends State<RideRegisterPage> {
+  var arrivesTextController = TextEditingController();
+
+  var leavesArrivesVar = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,42 +28,28 @@ class RideRegisterPage extends StatelessWidget {
           child: Column(
             children: [
               const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                 child: Image(
                   image: AssetImage('assets/images/logo_blue.png'),
-                  height: 200,
+                  height: 150,
                 ),
               ),
               base_TextFormField(
-                textController: timeTextController,
-                labelText: 'Time',
-              ),
-              base_TextFormField(
-                textController: passengersTextController,
-                labelText: 'Number of passengers',
+                textController: arrivesTextController,
+                labelText: (leavesArrivesVar)?'Llega a:':'Sale de:',
               ),
               base_ElevatedButton(
-                text: 'SALE DEL ITESO', //boton que cambia de color dependiendo
-                backgroundColor: const Color(0xFF064789),
-                onPressed: () {},
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: days(),
-              ),
-              base_ElevatedButton(
-                text: 'REGISTRAR AUTO',
+                text: (leavesArrivesVar)?'SALE DEL ITESO':'LLEGA AL ITESO', //boton que cambia de color dependiendo
                 backgroundColor: const Color(0xFF064789),
                 onPressed: () {
-                  registrarAutoButton(context);
+                  leavesArrives();
                 },
               ),
               base_ElevatedButton(
-                text: 'Cancelar',
-                backgroundColor: Colors.white,
-                textColor: const Color(0xFF064789),
+                text: 'Guardar', //boton que cambia de color dependiendo
+                backgroundColor: const Color(0xFF064789),
                 onPressed: () {
-                  cancelarButton(context);
+                  saveButton(context);
                 },
               ),
             ],
@@ -65,29 +59,19 @@ class RideRegisterPage extends StatelessWidget {
     );
   }
 
-  List<Widget> days() {
-    return [
-      _Buton(tag: "L", act: false, onTap: (){},),
-      _Buton(tag: "M", act: true, onTap: (){},),
-      _Buton(tag: "M", act: false, onTap: (){},),
-      _Buton(tag: "J", act: true, onTap: (){},),
-      _Buton(tag: "V", act: false, onTap: (){},),
-      _Buton(tag: "S", act: false, onTap: (){},)
-    ];
-  }
-  
-
-  cancelarButton(BuildContext context) {
-    print("cacelar");
-    Navigator.pop(context);
+  leavesArrives() {
+    print("leavesArrives");
+    setState(() {
+      leavesArrivesVar = !leavesArrivesVar;
+    });
   }
 
-  registrarAutoButton(BuildContext context) {
+  saveButton(BuildContext context) {
     print("RegistrarAuto");
     Navigator.pop(context);
   }
 }
-
+/*
 class _Buton extends StatelessWidget {
   const _Buton({required this.tag, required this.act, required this.onTap});
   final String tag;
@@ -123,3 +107,17 @@ class _Buton extends StatelessWidget {
     );
   }
 }
+*/
+
+/*
+  List<Widget> days() {
+    return [
+      _Buton(tag: "L", act: false, onTap: (){},),
+      _Buton(tag: "M", act: true, onTap: (){},),
+      _Buton(tag: "M", act: false, onTap: (){},),
+      _Buton(tag: "J", act: true, onTap: (){},),
+      _Buton(tag: "V", act: false, onTap: (){},),
+      _Buton(tag: "S", act: false, onTap: (){},)
+    ];
+  }
+*/
