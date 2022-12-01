@@ -76,7 +76,7 @@ class DriverCard extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    "${ride['dateList']}",
+                    "${ride['dateList'].hour}:${ride['dateList'].minute}",
                     style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 14,
