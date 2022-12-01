@@ -12,7 +12,6 @@ class RoutesBloc extends Bloc<RoutesEvent, RoutesState> {
       try {
         await RoutesC().createRoute(
           dateList: event.dateList,
-          time: event.time,
         );
         emit(CreateRoute());
       } catch (e) {

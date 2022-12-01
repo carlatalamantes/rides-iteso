@@ -70,4 +70,10 @@ class Auth {
         await _firestore.collection('users').doc(currentUser!.uid).get();
     return snapshot.data()!['firstLogin'];
   }
+
+  Future<String> getUserRole() async {
+    DocumentSnapshot<Map<String, dynamic>> snapshot =
+        await _firestore.collection('users').doc(currentUser!.uid).get();
+    return snapshot.data()!['role'];
+  }
 }

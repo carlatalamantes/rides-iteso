@@ -7,10 +7,9 @@ abstract class RoutesEvent extends Equatable {
 
 //Create route
 class CreateRouteRequested extends RoutesEvent {
-  final TimeOfDay time;
   final List<DateTime> dateList;
 
-  CreateRouteRequested(this.dateList, this.time);
+  CreateRouteRequested(this.dateList);
 }
 
 //Get routes

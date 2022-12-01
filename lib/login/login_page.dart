@@ -4,10 +4,10 @@ import 'package:rides_iteso/bloc/auth/auth.dart';
 import 'package:rides_iteso/bloc/auth/auth_bloc.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
+import 'package:rides_iteso/driver_home_page/driver_home_page.dart';
 import 'package:rides_iteso/driver_passenger_page/driver_passenger_page.dart';
 import 'package:rides_iteso/rides/rides_page.dart';
 import 'package:rides_iteso/signup/signupPage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -52,12 +52,23 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         );
                       } else {
-                        //TODO: Cambiar a la pagina de home
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) => const RidesPage(),
-                          ),
-                        );
+                        //Get user role
+                        Auth().getUserRole().then((value) {
+                          if (value == 'driver') {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => const DriverHomePage(),
+                              ),
+                            );
+                          } else {
+                            //TODO: Navigate to passenger page
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => const RidesPage(),
+                              ),
+                            );
+                          }
+                        });
                       }
                     });
                   }

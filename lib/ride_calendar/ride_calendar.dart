@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rides_iteso/bloc/routes/routes_bloc.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
+import 'package:rides_iteso/driver_home_page/driver_home_page.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class RideCalendar extends StatefulWidget {
@@ -43,10 +44,9 @@ class _RideCalendarState extends State<RideCalendar> {
                   }
 
                   if (state is CreateRoute) {
-                    Navigator.of(context).popUntil((route) => route.isFirst);
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) => RideCalendar(),
+                        builder: (context) => DriverHomePage(),
                       ),
                     );
                   }
@@ -161,10 +161,13 @@ class _RideCalendarState extends State<RideCalendar> {
   }
 
   saveButton(BuildContext context) {
+    dateList = dateList
+        .map((arguments) => DateTime(arguments.year, arguments.month,
+            arguments.day, time.hour, time.minute))
+        .toList();
     BlocProvider.of<RoutesBloc>(context).add(
       CreateRouteRequested(
         dateList,
-        time,
       ),
     );
   }
