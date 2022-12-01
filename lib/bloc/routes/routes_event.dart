@@ -14,5 +14,6 @@ class CreateRouteRequested extends RoutesEvent {
 
 //Get routes
 class GetRoutesRequested extends RoutesEvent {
-  GetRoutesRequested();
+  final bool getFutureRoutes;
+  GetRoutesRequested(this.getFutureRoutes);
 }

@@ -34,14 +34,24 @@ class RoutesC {
   }
 
   //Get routes from firestore and return a list of routes
-  Future<List> getRoutes() async {
+  Future<List> getRoutes(bool getFutureRoutes) async {
     List routes = [];
     await _firestore.collection('routes').get().then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
         //Filter by driver and todays date
-        if (result.data()['driver'] == currentUser!.uid &&
-            result.data()['dateList'].toDate().isAfter(DateTime.now())) {
-          routes.add(result.data());
+        if (result.data()['driver'] == currentUser!.uid) {
+          if (getFutureRoutes) {
+            if (result
+                .data()['dateList']
+                .toDate()
+                .isAfter(DateTime.now().add(const Duration(days: 1)))) {
+              routes.add(result.data());
+            }
+          } else {
+            if (result.data()['dateList'].toDate().isBefore(DateTime.now())) {
+              routes.add(result.data());
+            }
+          }
         }
       });
     });

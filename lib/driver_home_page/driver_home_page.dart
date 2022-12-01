@@ -6,6 +6,7 @@ import 'package:rides_iteso/bloc/user/user_bloc.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/driver_home_page/driver_card.dart';
 import 'package:rides_iteso/login/login_page.dart';
+import 'package:rides_iteso/ride_calendar/ride_calendar.dart';
 import 'package:rides_iteso/rides/driver/driver_rides_page.dart';
 import 'package:rides_iteso/rides/pass_driv_button.dart';
 import 'package:rides_iteso/rides/passenger/passenger_ride_page.dart';
@@ -22,12 +23,13 @@ class DriverHomePage extends StatefulWidget {
 class _DriverHomePageState extends State<DriverHomePage> {
   bool isDriver = true;
   String userUid = '';
+  bool getFutureRoutes = false;
 
   @override
   void initState() {
     super.initState();
     BlocProvider.of<RoutesBloc>(context).add(
-      GetRoutesRequested(),
+      GetRoutesRequested(getFutureRoutes),
     );
   }
 
@@ -90,17 +92,17 @@ class _DriverHomePageState extends State<DriverHomePage> {
                         },
                       ),
                       base_ElevatedButton(
-                        text: "Añadir dias",
+                        text: "AÑADIR HORARIOS",
                         backgroundColor: const Color(0xFF064789),
                         onPressed: () {
                           addDates();
                         },
                       ),
                       base_ElevatedButton(
-                        text: "Future Days",
+                        text: getFutureRoutes ? "VER PASADOS" : "VER FUTUROS",
                         backgroundColor: const Color(0xFF064789),
                         onPressed: () {
-                          addDates();
+                          futuros();
                         },
                       )
                     ],
@@ -115,7 +117,20 @@ class _DriverHomePageState extends State<DriverHomePage> {
   }
 
   addDates() {
-    print("add dates");
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const RideCalendar(),
+      ),
+    );
+  }
+
+  futuros() {
+    setState(() {
+      getFutureRoutes = !getFutureRoutes;
+    });
+    BlocProvider.of<RoutesBloc>(context).add(
+      GetRoutesRequested(getFutureRoutes),
+    );
   }
 
   guardarButton(BuildContext context) {
