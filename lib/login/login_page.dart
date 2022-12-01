@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rides_iteso/bloc/auth/auth.dart';
 import 'package:rides_iteso/bloc/auth/auth_bloc.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
+import 'package:rides_iteso/driver_passenger_page/driver_passenger_page.dart';
 import 'package:rides_iteso/rides/rides_page.dart';
 import 'package:rides_iteso/signup/signupPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -42,11 +44,23 @@ class _LoginPageState extends State<LoginPage> {
               child: BlocConsumer<AuthBloc, AuthState>(
                 listener: (context, state) {
                   if (state is Authenticated) {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => RidesPage(),
-                      ),
-                    );
+                    Auth().isUserFirstLogin().then((value) {
+                      if (value == true) {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => const DriverPassengerPage(),
+                          ),
+                        );
+                      } else {
+                        //TODO: Cambiar a la pagina de home
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => const RidesPage(),
+                          ),
+                        );
+                      }
+                    });
+                    /*   */
                   }
                   if (state is AuthError) {
                     scaffoldMessengerKey.currentState?.showSnackBar(
