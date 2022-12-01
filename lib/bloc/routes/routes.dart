@@ -21,6 +21,18 @@ class RoutesC {
       'passengers': [],
       'datetime': datetime,
     };
-    await _firestore.collection('users').doc().set(data);
+    await _firestore.collection('routes').doc().set(data);
+  }
+
+  //Get routes from firestore and return a list of routes
+  Future<List> getRoutes() async {
+    List routes = [];
+    await _firestore.collection('routes').get().then((querySnapshot) {
+      querySnapshot.docs.forEach((result) {
+        print(result.data());
+        routes.add(result.data());
+      });
+    });
+    return routes;
   }
 }

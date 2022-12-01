@@ -11,3 +11,8 @@ class CreateRouteRequested extends RoutesEvent {
 
   CreateRouteRequested(this.datetime);
 }
+
+//Get routes
+class GetRoutesRequested extends RoutesEvent {
+  GetRoutesRequested();
+}
