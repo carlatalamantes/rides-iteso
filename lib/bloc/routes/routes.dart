@@ -44,6 +44,9 @@ class RoutesC {
     await _firestore.collection('routes').get().then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
         //Filter by driver and todays date
+        var temp = result.data()['dateList'].toDate();
+        var temp2 = DateTime.now();
+
         if (result.data()['driver'] == currentUser!.uid) {
           if (getFutureRoutes) {
             if (result
@@ -53,7 +56,9 @@ class RoutesC {
               routes.add(result.data());
             }
           } else {
-            if (result.data()['dateList'].toDate().isBefore(DateTime.now())) {
+            if (temp.year == temp2.year &&
+                temp.month == temp2.month &&
+                temp.day == temp2.day) {
               routes.add(result.data());
             }
           }

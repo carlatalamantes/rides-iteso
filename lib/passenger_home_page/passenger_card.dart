@@ -2,22 +2,36 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rides_iteso/bloc/auth/auth.dart';
 import 'package:rides_iteso/bloc/passenger/passenger_bloc.dart';
-
-import '../bloc/routes/routes_bloc.dart';
 
 class PassengerCard extends StatelessWidget {
   const PassengerCard({
     Key? key,
     required this.ride,
-    required this.imParticipant,
   }) : super(key: key);
 
   final Map<String, dynamic> ride;
-  final bool imParticipant;
 
   @override
   Widget build(BuildContext context) {
+    bool imParticipant;
+
+    Future<String> getCurrentUserUid() {
+      return Auth().getUserId();
+    }
+
+    Future<bool> checkPassengers(List passengers) async {
+      for (var i = 0; i < passengers.length; i++) {
+        if (passengers[i] == await getCurrentUserUid()) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    imParticipant = checkPassengers(ride['passengers']) as bool;
+
     return Padding(
       padding: const EdgeInsets.only(top: 5, bottom: 5),
       child: Container(
@@ -101,7 +115,7 @@ class PassengerCard extends StatelessWidget {
                       }
                     },
                     child: Text(
-                      (imParticipant) ? "Enter" : "Cancel",
+                      (imParticipant) ? "Jpin" : "Leave",
                       style: const TextStyle(color: Color(0xFF064789)),
                     ),
                   ),

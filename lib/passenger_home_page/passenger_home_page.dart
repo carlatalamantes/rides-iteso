@@ -79,7 +79,8 @@ class _PassengerHomePage extends State<PassengerHomePage> {
                         itemCount: state.routes.length,
                         itemBuilder: (context, index) {
                           return PassengerCard(
-                              ride: state.routes[index], imParticipant: false);
+                            ride: state.routes[index],
+                          );
                         },
                       ),
                     ],

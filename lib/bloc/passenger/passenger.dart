@@ -15,9 +15,11 @@ class PassengerC {
     List routes = [];
     await _firestore.collection('routes').get().then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
-        routes.add(result.data());
-        //Filter routes where dateList is today
-        if (result.data()['dateList'].toDate().isBefore(DateTime.now())) {
+        var temp = result.data()['dateList'].toDate();
+        var temp2 = DateTime.now();
+        if (temp.year == temp2.year &&
+            temp.month == temp2.month &&
+            temp.day == temp2.day) {
           routes.add(result.data());
         }
       });
