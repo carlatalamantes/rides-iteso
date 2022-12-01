@@ -25,6 +25,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           carPlate: event.carPlate,
           carYear: event.carYear,
           carBrand: event.carBrand,
+          numPas: event.numPas,
         );
         emit(CreateUserCar());
       } catch (e) {

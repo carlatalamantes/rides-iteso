@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class RoutesC {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -10,18 +11,28 @@ class RoutesC {
     await _firestore.collection('users').doc(currentUser!.uid).get();
   }
 
-  Future<void> createRoute({required DateTime datetime}) async {
+  Future<void> createRoute(
+      {required List<DateTime> dateList, required TimeOfDay time}) async {
     DocumentSnapshot<Map<String, dynamic>> snapshot =
         await _firestore.collection('users').doc(currentUser!.uid).get();
 
-    final data = {
-      'origin': snapshot.data()!['origin'],
-      'destination': snapshot.data()!['destination'],
-      'idDriver': currentUser!.uid,
-      'passengers': [],
-      'datetime': datetime,
-    };
-    await _firestore.collection('routes').doc().set(data);
+    for (int i = 0; i < dateList.length; i++) {
+      //Create a new route
+      await _firestore.collection('routes').add({
+        'origin': snapshot.data()!['origin'],
+        'destination': snapshot.data()!['car']['numPas'],
+        'driver': currentUser!.uid,
+        'date': dateList[i],
+        'time': time,
+        'passengers': [],
+        'maxPassengers': snapshot.get('maxPassengers'),
+      });
+    }
+
+    //Change the user's firstLogin to false
+    await _firestore.collection('users').doc(currentUser!.uid).update({
+      'firstLogin': false,
+    });
   }
 
   //Get routes from firestore and return a list of routes

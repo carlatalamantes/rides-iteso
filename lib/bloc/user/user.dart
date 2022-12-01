@@ -16,6 +16,7 @@ class UserC {
     required String carColor,
     required String carPlate,
     required String carBrand,
+    required String numPas,
   }) async {
     final data = {
       'car': {
@@ -24,6 +25,7 @@ class UserC {
         'color': carColor,
         'plate': carPlate,
         'brand': carBrand,
+        'numPas': numPas,
       }
     };
     await _firestore

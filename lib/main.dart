@@ -5,6 +5,8 @@ import 'package:rides_iteso/bloc/user/user_bloc.dart';
 import 'package:rides_iteso/login/login_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'bloc/routes/routes_bloc.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -14,6 +16,7 @@ Future<void> main() async {
         create: (context) => AuthBloc(),
       ),
       BlocProvider<UserBloc>(create: (context) => UserBloc()),
+      BlocProvider<RoutesBloc>(create: (context) => RoutesBloc()),
     ],
     child: const MyApp(),
   ));
@@ -37,24 +40,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-/*
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(title: 'Material App', home: WidgetTree()
-        //LoginPage()
-        //SignupPage()
-        //RidesPage()
-        //CarRegisterPage()
-        );
-  }
-  
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Material App',
-      home: Scaffold(
-        body:  RideRegisterPage(),
-      ),
-    );
-  }
-*/
