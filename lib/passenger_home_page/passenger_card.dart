@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rides_iteso/bloc/passenger/passenger_bloc.dart';
 
 import '../bloc/routes/routes_bloc.dart';
 
@@ -17,7 +18,6 @@ class PassengerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(ride);
     return Padding(
       padding: const EdgeInsets.only(top: 5, bottom: 5),
       child: Container(
@@ -76,7 +76,7 @@ class PassengerCard extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    "${ride['dateList'].hour}:${ride['dateList'].minute}",
+                    "${ride['dateList']}:${ride['dateList']}",
                     style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 14,
@@ -91,12 +91,17 @@ class PassengerCard extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      BlocProvider.of<RoutesBloc>(context).add(
-                        DeleteRouteRequested(ride['id']),
-                      );
+                      //Check if im participant or not
+                      if (imParticipant) {
+                        BlocProvider.of<PassengerBloc>(context)
+                            .add(LeaveRouteRequested(ride['id']));
+                      } else {
+                        BlocProvider.of<PassengerBloc>(context)
+                            .add(JoinRouteRequested(ride['id']));
+                      }
                     },
                     child: Text(
-                      (imParticipant)?"Enter":"Cancel",
+                      (imParticipant) ? "Enter" : "Cancel",
                       style: const TextStyle(color: Color(0xFF064789)),
                     ),
                   ),

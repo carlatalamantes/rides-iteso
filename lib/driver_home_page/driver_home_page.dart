@@ -2,16 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rides_iteso/bloc/auth/auth_bloc.dart';
 import 'package:rides_iteso/bloc/routes/routes_bloc.dart';
-import 'package:rides_iteso/bloc/user/user_bloc.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/driver_home_page/driver_card.dart';
 import 'package:rides_iteso/login/login_page.dart';
 import 'package:rides_iteso/ride_calendar/ride_calendar.dart';
-import 'package:rides_iteso/rides/driver/driver_rides_page.dart';
-import 'package:rides_iteso/rides/pass_driv_button.dart';
-import 'package:rides_iteso/rides/passenger/passenger_ride_page.dart';
-
-import '../bloc/auth/auth.dart';
 
 class DriverHomePage extends StatefulWidget {
   const DriverHomePage({super.key});

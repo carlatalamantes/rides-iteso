@@ -44,6 +44,13 @@ class UserC {
         .collection('users')
         .doc(currentUser!.uid)
         .set(data, SetOptions(merge: true));
+
+    if (role == 'passenger') {
+      //Change the user's firstLogin to false
+      await _firestore.collection('users').doc(currentUser!.uid).update({
+        'firstLogin': false,
+      });
+    }
   }
 
   Future<void> createOriginDestination({

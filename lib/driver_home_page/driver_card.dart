@@ -17,7 +17,6 @@ class DriverCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(ride);
     return Padding(
       padding: const EdgeInsets.only(top: 5, bottom: 5),
       child: Container(
@@ -76,7 +75,7 @@ class DriverCard extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    "${ride['dateList'].hour}:${ride['dateList'].minute}",
+                    "${ride['dateList']}:${ride['dateList']}",
                     style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 14,

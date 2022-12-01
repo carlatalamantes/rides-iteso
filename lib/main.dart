@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:rides_iteso/bloc/auth/auth_bloc.dart';
 import 'package:rides_iteso/bloc/user/user_bloc.dart';
 import 'package:rides_iteso/driver_home_page/driver_home_page.dart';
-import 'package:rides_iteso/driver_next_page/driver_next_page.dart';
 import 'package:rides_iteso/login/login_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'bloc/passenger/passenger_bloc.dart';
 import 'bloc/routes/routes_bloc.dart';
 
 Future<void> main() async {
@@ -19,6 +19,7 @@ Future<void> main() async {
       ),
       BlocProvider<UserBloc>(create: (context) => UserBloc()),
       BlocProvider<RoutesBloc>(create: (context) => RoutesBloc()),
+      BlocProvider<PassengerBloc>(create: (context) => PassengerBloc()),
     ],
     child: const MyApp(),
   ));

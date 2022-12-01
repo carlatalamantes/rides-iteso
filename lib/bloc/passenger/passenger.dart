@@ -13,13 +13,11 @@ class PassengerC {
   //Get routes from firestore and return a list of routes
   Future<List> getRoutes() async {
     List routes = [];
-    await _firestore
-        .collection('routes')
-        .where('passengers', arrayContains: currentUser!.uid)
-        .get()
-        .then((querySnapshot) {
+    await _firestore.collection('routes').get().then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
-        if (result.data()['dateList'].toDate().isAfter(DateTime.now())) {
+        routes.add(result.data());
+        //Filter routes where dateList is today
+        if (result.data()['dateList'].toDate().isBefore(DateTime.now())) {
           routes.add(result.data());
         }
       });

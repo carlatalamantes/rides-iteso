@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rides_iteso/bloc/user/user_bloc.dart';
 import 'package:rides_iteso/car_register/car_register_Page.dart';
+import 'package:rides_iteso/passenger_home_page/passenger_home_page.dart';
 import 'package:rides_iteso/rides/pass_driv_button.dart';
 
 class DriverPassengerPage extends StatelessWidget {
@@ -30,7 +31,10 @@ class DriverPassengerPage extends StatelessWidget {
                           builder: (context) => const CarRegisterPage()),
                     );
                   } else {
-                    //TODO: implementar
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                          builder: (context) => const PassengerHomePage()),
+                    );
                   }
                 }
               },

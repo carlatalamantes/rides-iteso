@@ -4,9 +4,9 @@ import 'package:rides_iteso/bloc/passenger/passenger.dart';
 part 'passenger_state.dart';
 part 'passenger_event.dart';
 
-class RoutesBloc extends Bloc<PassengerEvent, PassengerState> {
+class PassengerBloc extends Bloc<PassengerEvent, PassengerState> {
   List<dynamic> routes = [];
-  RoutesBloc() : super(Routes()) {
+  PassengerBloc() : super(Routes()) {
     on<GetRoutesRequested>((event, emit) async {
       emit(Loading());
       try {

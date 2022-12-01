@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rides_iteso/bloc/auth/auth_bloc.dart';
-import 'package:rides_iteso/bloc/routes/routes_bloc.dart';
-import 'package:rides_iteso/bloc/user/user_bloc.dart';
-import 'package:rides_iteso/components/base_ElevatedButton.dart';
-import 'package:rides_iteso/driver_home_page/driver_card.dart';
+import 'package:rides_iteso/bloc/passenger/passenger_bloc.dart';
 import 'package:rides_iteso/login/login_page.dart';
 import 'package:rides_iteso/passenger_home_page/passenger_card.dart';
 import 'package:rides_iteso/ride_calendar/ride_calendar.dart';
-import 'package:rides_iteso/rides/driver/driver_rides_page.dart';
-import 'package:rides_iteso/rides/pass_driv_button.dart';
-import 'package:rides_iteso/rides/passenger/passenger_ride_page.dart';
-
-import '../bloc/auth/auth.dart';
 
 class PassengerHomePage extends StatefulWidget {
   const PassengerHomePage({super.key});
@@ -29,9 +21,7 @@ class _PassengerHomePage extends State<PassengerHomePage> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<RoutesBloc>(context).add(
-      GetRoutesRequested(getFutureRoutes),
-    );
+    BlocProvider.of<PassengerBloc>(context).add(GetRoutesRequested());
   }
 
   Future<void> signOut() async {
@@ -64,7 +54,7 @@ class _PassengerHomePage extends State<PassengerHomePage> {
           )
         ],
       ),
-      body: BlocConsumer<RoutesBloc, RoutesState>(
+      body: BlocConsumer<PassengerBloc, PassengerState>(
         listener: (context, state) {},
         builder: (context, state) {
           return SingleChildScrollView(
@@ -92,22 +82,6 @@ class _PassengerHomePage extends State<PassengerHomePage> {
                               ride: state.routes[index], imParticipant: false);
                         },
                       ),
-                      /*
-                      base_ElevatedButton(
-                        text: "AÑADIR HORARIOS",
-                        backgroundColor: const Color(0xFF064789),
-                        onPressed: () {
-                          addDates();
-                        },
-                      ),
-                      base_ElevatedButton(
-                        text: getFutureRoutes ? "VER PASADOS" : "VER FUTUROS",
-                        backgroundColor: const Color(0xFF064789),
-                        onPressed: () {
-                          futuros();
-                        },
-                      )
-                      */
                     ],
                   ),
                 ),
@@ -124,15 +98,6 @@ class _PassengerHomePage extends State<PassengerHomePage> {
       MaterialPageRoute(
         builder: (context) => const RideCalendar(),
       ),
-    );
-  }
-
-  futuros() {
-    setState(() {
-      getFutureRoutes = !getFutureRoutes;
-    });
-    BlocProvider.of<RoutesBloc>(context).add(
-      GetRoutesRequested(getFutureRoutes),
     );
   }
 
