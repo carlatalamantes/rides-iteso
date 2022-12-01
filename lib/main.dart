@@ -4,6 +4,7 @@ import 'package:rides_iteso/bloc/auth/auth_bloc.dart';
 import 'package:rides_iteso/bloc/user/user_bloc.dart';
 import 'package:rides_iteso/login/login_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rides_iteso/ride_calendar/ride_calendar.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Rides ITESO',
-      home: const LoginPage(),
+      home: RideCalendar(),//const LoginPage(),
       theme: ThemeData(
         primaryColor: Colors.blue.shade900,
         appBarTheme: const AppBarTheme(

@@ -14,7 +14,7 @@ class _RideCalendarState extends State<RideCalendar> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   List<DateTime> dateList = [];
-  TimeOfDay? time = TimeOfDay(hour: 12, minute: 12);
+  TimeOfDay time = TimeOfDay(hour: 0, minute: 0);
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +84,13 @@ class _RideCalendarState extends State<RideCalendar> {
                   },
                 ),
               ),
+              Text(
+                "${time.hour}:${time.minute}",
+                style: const TextStyle(
+                  color: Color(0xFF064789),
+                  fontSize: 30,
+                ),
+              ),
               base_ElevatedButton(
                 text: 'Pick Time', //boton que cambia de color dependiendo
                 backgroundColor: const Color(0xFF064789),
@@ -106,7 +113,7 @@ class _RideCalendarState extends State<RideCalendar> {
   }
 
   pickTime(BuildContext context) async {
-    time = await showTimePicker(
+    TimeOfDay? tmp = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
       builder: (BuildContext context, Widget? child) {
@@ -116,13 +123,19 @@ class _RideCalendarState extends State<RideCalendar> {
         );
       },
     );
-    time = time?? const TimeOfDay(hour: 12, minute: 12);
+    setState(() {
+      time = tmp ?? time;
+    });
     print("Pick Time");
   }
 
   saveButton(BuildContext context) {
-    DateTime function_name(arguments) => new DateTime(arguments.year, arguments.month, arguments.day, time!.hour, time!.minute);
-    List<DateTime> newList = dateList.map((arguments) => new DateTime(arguments.year, arguments.month, arguments.day, time!.hour, time!.minute)).toList();
+    List<DateTime> newList = dateList
+        .map((arguments) => DateTime(arguments.year, arguments.month,
+            arguments.day, time!.hour, time!.minute))
+        .toList();
+    print(time);
+    print(dateList);
     print(newList);
     print("se guardaron las fechas");
     //Navigator.pop(context);
