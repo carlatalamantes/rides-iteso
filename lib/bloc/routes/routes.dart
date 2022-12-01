@@ -38,7 +38,11 @@ class RoutesC {
     List routes = [];
     await _firestore.collection('routes').get().then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
-        routes.add(result.data());
+        //Filter by driver and todays date
+        if (result.data()['driver'] == currentUser!.uid &&
+            result.data()['dateList'].toDate().isAfter(DateTime.now())) {
+          routes.add(result.data());
+        }
       });
     });
     return routes;
