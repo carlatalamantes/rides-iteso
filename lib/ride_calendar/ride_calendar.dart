@@ -68,7 +68,7 @@ class _RideCalendarState extends State<RideCalendar> {
                           lastDay: DateTime.utc(2030, 3, 14),
                           focusedDay: _focusedDay,
                           calendarFormat: _calendarFormat,
-                          availableCalendarFormats: {
+                          availableCalendarFormats: const {
                             CalendarFormat.month: 'Month'
                           },
                           selectedDayPredicate: (day) {
