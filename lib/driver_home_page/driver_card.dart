@@ -13,7 +13,7 @@ class DriverCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top:5, bottom: 5),
+      padding: const EdgeInsets.only(top: 5, bottom: 5),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -34,10 +34,11 @@ class DriverCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height:25),
               Row(
                 children: [
                   Text(
-                    "${ride['location']}",
+                    "De: ${ride['from']}",
                     style: const TextStyle(
                       color: Color(0xFF064789),
                       fontWeight: FontWeight.bold,
@@ -56,9 +57,14 @@ class DriverCard extends StatelessWidget {
                   ),
                 ],
               ),
+              SizedBox(height:10),
               Text(
-                "${ride['time']}",
-                style: const TextStyle(color: Colors.grey),
+                "Hacia: ${ride['to']}",
+                style: const TextStyle(
+                  color: Color(0xFF064789),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
               ),
               const SizedBox(
                 height: 5,
@@ -67,7 +73,7 @@ class DriverCard extends StatelessWidget {
                 children: const [
                   Spacer(),
                   Text(
-                    "Editar",
+                    "Cancel",
                     style: TextStyle(color: Color(0xFF064789)),
                   ),
                 ],
@@ -78,5 +84,4 @@ class DriverCard extends StatelessWidget {
       ),
     );
   }
-
 }

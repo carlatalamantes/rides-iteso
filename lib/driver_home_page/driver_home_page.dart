@@ -79,16 +79,23 @@ class _DriverHomePageState extends State<DriverHomePage> {
                       ),
                       const DriverCard(
                         ride: {
-                          "name": "Juan Perez torrez ",
-                          "location": 'Plaza del Sol',
+                          "registererd": 1,
                           "passengerLimit": 4,
                           "time": "16:00",
+                          "from": "ITESO",
+                          "to": "Plaza del Sol"
                         },
                       ),
                       base_ElevatedButton(
                         text: "Añadir dias",
-                        backgroundColor: Colors.white,
-                        textColor: const Color(0xFF064789),
+                        backgroundColor: const Color(0xFF064789),
+                        onPressed: () {
+                          addDates();
+                        },
+                      ),
+                      base_ElevatedButton(
+                        text: "Future Days",
+                        backgroundColor: const Color(0xFF064789),
                         onPressed: () {
                           addDates();
                         },
