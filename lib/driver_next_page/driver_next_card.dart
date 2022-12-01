@@ -1,16 +1,17 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:rides_iteso/components/base_ElevatedButton.dart';
 
-class DriverCard extends StatelessWidget {
-  const DriverCard({
+class DriverNextCard extends StatelessWidget {
+  const DriverNextCard({
     Key? key,
     required this.ride,
     required this.index,
   }) : super(key: key);
 
-  final Map<String, dynamic> ride;
   final int index;
+  final Map<String, dynamic> ride;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class DriverCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height:25),
+              const SizedBox(height:25),
               Row(
                 children: [
                   Text(
@@ -59,7 +60,7 @@ class DriverCard extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height:10),
+              const SizedBox(height:10),
               Row(
                 children: [
                   Text(
@@ -85,8 +86,12 @@ class DriverCard extends StatelessWidget {
                 height: 10,
               ),
               Row(
-                children: const [
-                  Spacer(),
+                children: [
+                  Text(
+                    "${ride['day']}",
+                    style: TextStyle(color: Color(0xFF064789)),
+                  ),
+                  const Spacer(),
                   Text(
                     "Cancel",
                     style: TextStyle(color: Color(0xFF064789)),

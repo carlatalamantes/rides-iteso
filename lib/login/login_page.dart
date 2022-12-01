@@ -37,108 +37,110 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldMessenger(
-        key: scaffoldMessengerKey,
-        child: Scaffold(
-          body: SingleChildScrollView(
-              padding: const EdgeInsets.all(10),
-              child: BlocConsumer<AuthBloc, AuthState>(
-                listener: (context, state) {
-                  if (state is Authenticated) {
-                    Auth().isUserFirstLogin().then((value) {
-                      if (value == true) {
+      key: scaffoldMessengerKey,
+      child: Scaffold(
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(10),
+          child: BlocConsumer<AuthBloc, AuthState>(
+            listener: (context, state) {
+              if (state is Authenticated) {
+                Auth().isUserFirstLogin().then((value) {
+                  if (value == true) {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => DriverPassengerPage(),
+                      ),
+                    );
+                  } else {
+                    //Get user role
+                    Auth().getUserRole().then((value) {
+                      if (value == 'driver') {
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
-                            builder: (context) => DriverPassengerPage(),
+                            builder: (context) => const DriverHomePage(),
                           ),
                         );
                       } else {
-                        //Get user role
-                        Auth().getUserRole().then((value) {
-                          if (value == 'driver') {
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                builder: (context) => const DriverHomePage(),
-                              ),
-                            );
-                          } else {
-                            //TODO: Navigate to passenger page
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                builder: (context) => const RidesPage(),
-                              ),
-                            );
-                          }
-                        });
+                        //TODO: Navigate to passenger page
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => const RidesPage(),
+                          ),
+                        );
                       }
                     });
                   }
-                  if (state is AuthError) {
-                    scaffoldMessengerKey.currentState?.showSnackBar(
-                      SnackBar(
-                        content: Text(state.error),
-                        backgroundColor: Colors.red,
+                });
+              }
+              if (state is AuthError) {
+                scaffoldMessengerKey.currentState?.showSnackBar(
+                  SnackBar(
+                    content: Text(state.error),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              }
+            },
+            builder: (context, state) {
+              return Center(
+                child: Column(
+                  children: [
+                    const Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                      child: Image(
+                        image: AssetImage('assets/images/logo_blue.png'),
+                        height: 250,
                       ),
-                    );
-                  }
-                },
-                builder: (context, state) {
-                  return Center(
-                    child: Column(
-                      children: [
-                        const Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                          child: Image(
-                            image: AssetImage('assets/images/logo_blue.png'),
-                            height: 250,
-                          ),
-                        ),
-                        Form(
-                            key: _formKey,
-                            child: Column(
-                              children: [
-                                base_TextFormField(
-                                  textController: emailTextController,
-                                  labelText: 'Correo electrónico *',
-                                  isRequired: true,
-                                  keyboardType: TextInputType.emailAddress,
-                                ),
-                                base_TextFormField(
-                                  textController: psswrdTextController,
-                                  labelText: 'Contraseña *',
-                                  isRequired: true,
-                                  isPassword: true,
-                                ),
-                                base_ElevatedButton(
-                                  text: 'INICIAR SESIÓN',
-                                  backgroundColor: const Color(0xFF064789),
-                                  onPressed: () {
-                                    iniciarSessionButton(context);
-                                  },
-                                )
-                              ],
-                            )),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const Text(
-                          '¿No tienes cuenta?',
-                          style: TextStyle(color: Color(0x80333533)),
-                        ),
-                        base_ElevatedButton(
-                          text: 'REGISTRARME',
-                          backgroundColor: Colors.white,
-                          textColor: const Color(0xFF064789),
-                          onPressed: () {
-                            registrarmeButton(context);
-                          },
-                        )
-                      ],
                     ),
-                  );
-                },
-              )),
-        ));
+                    Form(
+                        key: _formKey,
+                        child: Column(
+                          children: [
+                            base_TextFormField(
+                              textController: emailTextController,
+                              labelText: 'Correo electrónico *',
+                              isRequired: true,
+                              keyboardType: TextInputType.emailAddress,
+                            ),
+                            base_TextFormField(
+                              textController: psswrdTextController,
+                              labelText: 'Contraseña *',
+                              isRequired: true,
+                              isPassword: true,
+                            ),
+                            base_ElevatedButton(
+                              text: 'INICIAR SESIÓN',
+                              backgroundColor: const Color(0xFF064789),
+                              onPressed: () {
+                                iniciarSessionButton(context);
+                              },
+                            )
+                          ],
+                        )),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Text(
+                      '¿No tienes cuenta?',
+                      style: TextStyle(color: Color(0x80333533)),
+                    ),
+                    base_ElevatedButton(
+                      text: 'REGISTRARME',
+                      backgroundColor: Colors.white,
+                      textColor: const Color(0xFF064789),
+                      onPressed: () {
+                        registrarmeButton(context);
+                      },
+                    )
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+      ),
+    );
   }
 
   iniciarSessionButton(BuildContext context) {

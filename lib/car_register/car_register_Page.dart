@@ -28,91 +28,92 @@ class _CarRegisterPageState extends State<CarRegisterPage> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldMessenger(
-        key: scaffoldMessengerKey,
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            foregroundColor: Colors.black,
-            elevation: 0.0,
-          ),
-          body: SingleChildScrollView(
-              padding: const EdgeInsets.all(20),
-              child: BlocConsumer<UserBloc, UserState>(
-                listener: (context, state) {
-                  if (state is CreateUserCar) {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                          builder: (context) => RideRegisterPage()),
-                    );
-                  }
-                  if (state is CreateUserCarError) {
-                    scaffoldMessengerKey.currentState?.showSnackBar(
-                      SnackBar(
-                        content: Text(state.error),
-                        backgroundColor: Colors.red,
-                      ),
-                    );
-                  }
-                },
-                builder: (context, state) {
-                  return Form(
-                      key: _formKey,
-                      child: Center(
-                        child: Column(
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 5),
-                              child: Image(
-                                image:
-                                    AssetImage('assets/images/logo_blue.png'),
-                                height: 150,
-                              ),
-                            ),
-                            base_TextFormField(
-                              textController: plateTextController,
-                              labelText: 'Placas',
-                              isRequired: true,
-                            ),
-                            base_TextFormField(
-                              textController: marcaTextController,
-                              labelText: 'Marca',
-                              isRequired: true,
-                            ),
-                            base_TextFormField(
-                              textController: modeloTextController,
-                              labelText: 'Modelo',
-                              isRequired: true,
-                            ),
-                            base_TextFormField(
-                              textController: colorTextController,
-                              labelText: 'Color',
-                              isRequired: true,
-                            ),
-                            base_TextFormField(
-                                textController: yearTextController,
-                                labelText: 'Año',
-                                isRequired: true,
-                                keyboardType: TextInputType.number),
-                            base_TextFormField(
-                              textController: numPasTextController,
-                              labelText: 'Asientos disponibles',
-                              keyboardType: TextInputType.number,
-                              isRequired: true,
-                            ),
-                            base_ElevatedButton(
-                              text: 'REGISTRAR AUTO',
-                              backgroundColor: const Color(0xFF064789),
-                              onPressed: () {
-                                registrarAutoButton(context);
-                              },
-                            ),
-                          ],
+      key: scaffoldMessengerKey,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          foregroundColor: Colors.black,
+          elevation: 0.0,
+        ),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
+          child: BlocConsumer<UserBloc, UserState>(
+            listener: (context, state) {
+              if (state is CreateUserCar) {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => RideRegisterPage()),
+                );
+              }
+              if (state is CreateUserCarError) {
+                scaffoldMessengerKey.currentState?.showSnackBar(
+                  SnackBar(
+                    content: Text(state.error),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              }
+            },
+            builder: (context, state) {
+              return Form(
+                key: _formKey,
+                child: Center(
+                  child: Column(
+                    children: [
+                      const Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                        child: Image(
+                          image: AssetImage('assets/images/logo_blue.png'),
+                          height: 150,
                         ),
-                      ));
-                },
-              )),
-        ));
+                      ),
+                      base_TextFormField(
+                        textController: plateTextController,
+                        labelText: 'Placas',
+                        isRequired: true,
+                      ),
+                      base_TextFormField(
+                        textController: marcaTextController,
+                        labelText: 'Marca',
+                        isRequired: true,
+                      ),
+                      base_TextFormField(
+                        textController: modeloTextController,
+                        labelText: 'Modelo',
+                        isRequired: true,
+                      ),
+                      base_TextFormField(
+                        textController: colorTextController,
+                        labelText: 'Color',
+                        isRequired: true,
+                      ),
+                      base_TextFormField(
+                          textController: yearTextController,
+                          labelText: 'Año',
+                          isRequired: true,
+                          keyboardType: TextInputType.number),
+                      base_TextFormField(
+                        textController: numPasTextController,
+                        labelText: 'Asientos disponibles',
+                        keyboardType: TextInputType.number,
+                        isRequired: true,
+                      ),
+                      base_ElevatedButton(
+                        text: 'REGISTRAR AUTO',
+                        backgroundColor: const Color(0xFF064789),
+                        onPressed: () {
+                          registrarAutoButton(context);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ),
+    );
   }
 
   registrarAutoButton(BuildContext context) {

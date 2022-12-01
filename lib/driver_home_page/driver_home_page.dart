@@ -33,6 +33,65 @@ class _DriverHomePageState extends State<DriverHomePage> {
     BlocProvider.of<AuthBloc>(context).add(SignOutRequested());
   }
 
+  var list = [
+    {
+      "registererd": 1,
+      "passengerLimit": 4,
+      "time": "12:00",
+      "from": "ITESO",
+      "to": "Plaza del Sol"
+    },
+    {
+      "registererd": 1,
+      "passengerLimit": 4,
+      "time": "16:00",
+      "from": "ITESO",
+      "to": "Plaza del Sol"
+    },
+    {
+      "registererd": 1,
+      "passengerLimit": 4,
+      "time": "23:00",
+      "from": "ITESO",
+      "to": "Plaza del Sol"
+    },
+    {
+      "registererd": 1,
+      "passengerLimit": 4,
+      "time": "1:00",
+      "from": "ITESO",
+      "to": "Plaza del Sol"
+    },
+    {
+      "registererd": 1,
+      "passengerLimit": 4,
+      "time": "4:00",
+      "from": "ITESO",
+      "to": "Plaza del Sol"
+    },
+    {
+      "registererd": 1,
+      "passengerLimit": 4,
+      "time": "23:00",
+      "from": "ITESO",
+      "to": "Plaza del Sol"
+    },
+    {
+      "registererd": 1,
+      "passengerLimit": 4,
+      "time": "7:00",
+      "from": "ITESO",
+      "to": "Plaza del Sol"
+    },
+    {
+      "registererd": 1,
+      "passengerLimit": 4,
+      "time": "9:00",
+      "from": "ITESO",
+      "to": "Plaza del Sol"
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,51 +120,49 @@ class _DriverHomePageState extends State<DriverHomePage> {
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(10),
-        child: Center(
-          child: Column(
-            children: [
-              SingleChildScrollView(
-                child: Center(
-                  child: Column(
-                    children: [
-                      const Center(
-                        child: Text(
-                          'Pickup',
-                          style: TextStyle(fontSize: 16, color: Colors.grey),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const DriverCard(
-                        ride: {
-                          "registererd": 1,
-                          "passengerLimit": 4,
-                          "time": "16:00",
-                          "from": "ITESO",
-                          "to": "Plaza del Sol"
-                        },
-                      ),
-                      base_ElevatedButton(
-                        text: "Añadir dias",
-                        backgroundColor: const Color(0xFF064789),
-                        onPressed: () {
-                          addDates();
-                        },
-                      ),
-                      base_ElevatedButton(
-                        text: "Future Days",
-                        backgroundColor: const Color(0xFF064789),
-                        onPressed: () {
-                          addDates();
-                        },
-                      )
-                    ],
+        child: Column(
+          children: [
+            Center(
+              child: Column(
+                children: [
+                  const Center(
+                    child: Text(
+                      'Pickup',
+                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                    ),
                   ),
-                ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: list.length,
+                    itemBuilder: (context, index) {
+                      return DriverCard(
+                        ride: list[index],
+                        index: index
+                      );
+                    },
+                  ),
+                  base_ElevatedButton(
+                    text: "Añadir dias",
+                    backgroundColor: const Color(0xFF064789),
+                    onPressed: () {
+                      addDates();
+                    },
+                  ),
+                  base_ElevatedButton(
+                    text: "Future Days",
+                    backgroundColor: const Color(0xFF064789),
+                    onPressed: () {
+                      addDates();
+                    },
+                  )
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
