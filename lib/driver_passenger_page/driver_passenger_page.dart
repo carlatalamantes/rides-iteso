@@ -20,8 +20,8 @@ class DriverPassengerPage extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text("Que eres?",style: TextStyle(fontSize: 30, color: Color(0xFF064789)),),
-                SizedBox(height: 40,),
+                const Text("Que eres?",style: TextStyle(fontSize: 30, color: Color(0xFF064789)),),
+                const SizedBox(height: 40,),
                 Column(
                   children: [
                     PassDrivButton(

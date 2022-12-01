@@ -17,6 +17,7 @@ class _CarRegisterPageState extends State<CarRegisterPage> {
   var colorTextController = TextEditingController();
   var yearTextController = TextEditingController();
   var plateTextController = TextEditingController();
+  var numPassajerosTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +33,15 @@ class _CarRegisterPageState extends State<CarRegisterPage> {
           child: Column(
             children: [
               const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                 child: Image(
                   image: AssetImage('assets/images/logo_blue.png'),
-                  height: 200,
+                  height: 150,
                 ),
+              ), 
+              base_TextFormField(
+                textController: plateTextController,
+                labelText: 'Placas',
               ),
               base_TextFormField(
                 textController: marcaTextController,
@@ -49,6 +54,16 @@ class _CarRegisterPageState extends State<CarRegisterPage> {
               base_TextFormField(
                 textController: colorTextController,
                 labelText: 'Color',
+              ),
+              base_TextFormField(
+                textController: yearTextController,
+                labelText: 'Año',
+                keyboardType: TextInputType.number
+              ),
+              base_TextFormField(
+                textController: numPassajerosTextController,
+                labelText: 'Num de pasajeros',
+                keyboardType: TextInputType.number
               ),
               base_ElevatedButton(
                 text: 'REGISTRAR AUTO',
