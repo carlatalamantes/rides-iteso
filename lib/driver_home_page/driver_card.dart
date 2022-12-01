@@ -14,7 +14,6 @@ class DriverCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(ride);
     return Padding(
       padding: const EdgeInsets.only(top: 5, bottom: 5),
       child: Container(
@@ -55,7 +54,7 @@ class DriverCard extends StatelessWidget {
                     size: 30,
                   ),
                   Text(
-                    "${ride['registererd']}/${ride['passengerLimit']}",
+                    "${ride['passengers'].length}/${ride['maxPassengers']}",
                     style: const TextStyle(color: Colors.grey),
                   ),
                 ],
@@ -64,7 +63,7 @@ class DriverCard extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "Hacia: ${ride['to']}",
+                    "Hacia: ${ride['destination']}",
                     style: const TextStyle(
                       color: Color(0xFF064789),
                       fontWeight: FontWeight.bold,

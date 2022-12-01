@@ -38,79 +38,80 @@ class _DriverHomePageState extends State<DriverHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          foregroundColor: Colors.black,
-          elevation: 0.0,
-          actions: [
-            BlocConsumer<AuthBloc, AuthState>(
-              listener: (context, state) {
-                if (state is UnAuthenticated) {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const LoginPage(),
-                    ),
-                  );
-                }
-              },
-              builder: (context, state) {
-                return IconButton(
-                    onPressed: () => signOut(),
-                    icon: const Icon(Icons.logout_outlined));
-              },
-            )
-          ],
-        ),
-        body: BlocConsumer<RoutesBloc, RoutesState>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            return SingleChildScrollView(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  Center(
-                    child: Column(
-                      children: [
-                        const Center(
-                          child: Text(
-                            'Pickup',
-                            style: TextStyle(fontSize: 16, color: Colors.grey),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: state.routes.length,
-                          itemBuilder: (context, index) {
-                            return DriverCard(
-                                ride: state.routes[index], index: index);
-                          },
-                        ),
-                        base_ElevatedButton(
-                          text: "Añadir dias",
-                          backgroundColor: const Color(0xFF064789),
-                          onPressed: () {
-                            addDates();
-                          },
-                        ),
-                        base_ElevatedButton(
-                          text: "Future Days",
-                          backgroundColor: const Color(0xFF064789),
-                          onPressed: () {
-                            addDates();
-                          },
-                        )
-                      ],
-                    ),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.black,
+        elevation: 0.0,
+        actions: [
+          BlocConsumer<AuthBloc, AuthState>(
+            listener: (context, state) {
+              if (state is UnAuthenticated) {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => const LoginPage(),
                   ),
-                ],
-              ),
-            );
-          },
-        ));
+                );
+              }
+            },
+            builder: (context, state) {
+              return IconButton(
+                  onPressed: () => signOut(),
+                  icon: const Icon(Icons.logout_outlined));
+            },
+          )
+        ],
+      ),
+      body: BlocConsumer<RoutesBloc, RoutesState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return SingleChildScrollView(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: [
+                Center(
+                  child: Column(
+                    children: [
+                      const Center(
+                        child: Text(
+                          'Pickup',
+                          style: TextStyle(fontSize: 16, color: Colors.grey),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: state.routes.length,
+                        itemBuilder: (context, index) {
+                          return DriverCard(
+                              ride: state.routes[index], index: index);
+                        },
+                      ),
+                      base_ElevatedButton(
+                        text: "Añadir dias",
+                        backgroundColor: const Color(0xFF064789),
+                        onPressed: () {
+                          addDates();
+                        },
+                      ),
+                      base_ElevatedButton(
+                        text: "Future Days",
+                        backgroundColor: const Color(0xFF064789),
+                        onPressed: () {
+                          addDates();
+                        },
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
   }
 
   addDates() {

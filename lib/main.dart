@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Rides ITESO',
-      home: DriverHomePage(),//const LoginPage(),
+      home: const LoginPage(),
       theme: ThemeData(
         primaryColor: Colors.blue.shade900,
         appBarTheme: const AppBarTheme(
