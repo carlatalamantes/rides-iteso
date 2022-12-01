@@ -1,9 +1,12 @@
+import 'dart:ffi';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Auth {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  User? get currentUser => _firebaseAuth.currentUser;
 
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
   Stream get authStateChangesFire => _firestore.collection('users').snapshots();
@@ -37,16 +40,28 @@ class Auth {
       password: password,
     )
         .then((registeredUser) async {
+      //Create user in firestore
       await _firestore.collection('users').doc(registeredUser.user?.uid).set({
         'uid': registeredUser.user!.uid,
         'name': name,
         'lastName': lastName,
         'secondLastName': secondLastName,
+        'firstLogin': true
       });
     });
   }
 
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
+  }
+
+  Future<DocumentSnapshot> getUserData() async {
+    return _firestore.collection('users').doc(currentUser!.uid).get();
+  }
+
+  Future<bool> isUserFirstLogin() async {
+    DocumentSnapshot<Map<String, dynamic>> snapshot =
+        await _firestore.collection('users').doc(currentUser!.uid).get();
+    return snapshot.data()!['firstLogin'];
   }
 }

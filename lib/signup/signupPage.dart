@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rides_iteso/bloc/auth/auth.dart';
 import 'package:rides_iteso/bloc/auth/auth_bloc.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
+import 'package:rides_iteso/driver_passenger_page/driver_passenger_page.dart';
 import 'package:rides_iteso/rides/rides_page.dart';
 
 class SignupPage extends StatelessWidget {
@@ -49,7 +51,7 @@ class SignupPage extends StatelessWidget {
                   Navigator.of(context).popUntil((route) => route.isFirst);
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
-                      builder: (context) => RidesPage(),
+                      builder: (context) => const DriverPassengerPage(),
                     ),
                   );
                 }
