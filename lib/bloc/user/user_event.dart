@@ -34,3 +34,10 @@ class CreateUserRoleRequested extends UserEvent {
 
   CreateUserRoleRequested(this.role);
 }
+
+class CreateOriginDestinationRequested extends UserEvent {
+  final String origin;
+  final String destination;
+
+  CreateOriginDestinationRequested(this.origin, this.destination);
+}

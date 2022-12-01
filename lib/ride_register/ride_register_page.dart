@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rides_iteso/bloc/user/user_bloc.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
 
@@ -10,114 +12,142 @@ class RideRegisterPage extends StatefulWidget {
 }
 
 class _RideRegisterPageState extends State<RideRegisterPage> {
-  var arrivesTextController = TextEditingController();
+  var originTextController = TextEditingController(text: "");
+  var destinyTextController = TextEditingController(text: "ITESO");
 
-  var leavesArrivesVar = false;
+  var originIsIteso = false;
+
+  final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ScaffoldMessenger(
+        child: Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
         elevation: 0.0,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: Center(
-          child: Column(
-            children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                child: Image(
-                  image: AssetImage('assets/images/logo_blue.png'),
-                  height: 150,
-                ),
-              ),
-              base_TextFormField(
-                textController: arrivesTextController,
-                labelText: (leavesArrivesVar)?'Llega a:':'Sale de:',
-              ),
-              base_ElevatedButton(
-                text: (leavesArrivesVar)?'SALE DEL ITESO':'LLEGA AL ITESO', //boton que cambia de color dependiendo
-                backgroundColor: const Color(0xFF064789),
-                onPressed: () {
-                  leavesArrives();
-                },
-              ),
-              base_ElevatedButton(
-                text: 'Guardar', //boton que cambia de color dependiendo
-                backgroundColor: const Color(0xFF064789),
-                onPressed: () {
-                  saveButton(context);
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+          padding: const EdgeInsets.all(20),
+          child: BlocConsumer<UserBloc, UserState>(
+            listener: (context, state) {
+              if (state is CreateOriginDestinationError) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.error),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              }
 
-  leavesArrives() {
-    print("leavesArrives");
-    setState(() {
-      leavesArrivesVar = !leavesArrivesVar;
-    });
+              if (state is CreateOriginDestination) {
+                //TODO: implementar navegacion a la pagina de calendario
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => RideRegisterPage(),
+                  ),
+                );
+              }
+
+              // TODO: implement listener
+            },
+            builder: (context, state) {
+              return Center(
+                child: Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                      child: Image(
+                        image: AssetImage('assets/images/logo_blue.png'),
+                        height: 150,
+                      ),
+                    ),
+                    const Text("Switch para cambiar entre origen y destino",
+                        style: TextStyle(
+                            color: Colors.black, fontStyle: FontStyle.italic)),
+                    Switch(
+                      // This bool value toggles the switch.
+                      value: originIsIteso,
+                      activeColor: Colors.blue,
+                      onChanged: (bool value) {
+                        // This is called when the user toggles the switch.
+                        setState(() {
+                          originIsIteso = value;
+                          if (originIsIteso) {
+                            originTextController.text = "ITESO";
+                            destinyTextController.text = "";
+                          } else {
+                            originTextController.text = "";
+                            destinyTextController.text = "ITESO";
+                          }
+                        });
+                      },
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 16),
+                      child: TextFormField(
+                        readOnly: originIsIteso,
+                        controller: originTextController,
+                        keyboardType: TextInputType.text,
+                        decoration: const InputDecoration(
+                          border: UnderlineInputBorder(),
+                          labelText: 'Origen',
+                          prefixIcon: Align(
+                            widthFactor: 1.0,
+                            heightFactor: 1.0,
+                            child: Icon(
+                              Icons.edit_location_rounded,
+                            ),
+                          ),
+                        ),
+                        validator: (value) =>
+                            value!.isEmpty ? 'Este campo es requerido' : null,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 16),
+                      child: TextFormField(
+                        readOnly: !originIsIteso,
+                        controller: destinyTextController,
+                        keyboardType: TextInputType.text,
+                        decoration: const InputDecoration(
+                          border: UnderlineInputBorder(),
+                          labelText: 'Destino',
+                          prefixIcon: Align(
+                            widthFactor: 1.0,
+                            heightFactor: 1.0,
+                            child: Icon(
+                              Icons.square,
+                            ),
+                          ),
+                        ),
+                        validator: (value) =>
+                            value!.isEmpty ? 'Este campo es requerido' : null,
+                      ),
+                    ),
+                    base_ElevatedButton(
+                      text: 'Guardar', //boton que cambia de color dependiendo
+                      backgroundColor: const Color(0xFF064789),
+                      onPressed: () {
+                        saveButton(context);
+                      },
+                    ),
+                  ],
+                ),
+              );
+            },
+          )),
+    ));
   }
 
   saveButton(BuildContext context) {
-    print("RegistrarAuto");
-    Navigator.pop(context);
-  }
-}
-/*
-class _Buton extends StatelessWidget {
-  const _Buton({required this.tag, required this.act, required this.onTap});
-  final String tag;
-  final bool act;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 35,
-        height: 35,
-        decoration: BoxDecoration(
-          color: (act) ? const Color(0xFF064789) : Colors.white,
-          borderRadius: BorderRadius.circular(30),
-        ),
-        child: Row(
-          children: [
-            const Spacer(),
-            Text(
-              tag,
-              style: TextStyle(
-                color: (act) ? Colors.white : Colors.grey,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
-            ),
-            const Spacer(),
-          ],
-        ),
-      ),
+    BlocProvider.of<UserBloc>(context).add(
+      CreateOriginDestinationRequested(
+          originTextController.text, destinyTextController.text),
     );
   }
 }
-*/
-
-/*
-  List<Widget> days() {
-    return [
-      _Buton(tag: "L", act: false, onTap: (){},),
-      _Buton(tag: "M", act: true, onTap: (){},),
-      _Buton(tag: "M", act: false, onTap: (){},),
-      _Buton(tag: "J", act: true, onTap: (){},),
-      _Buton(tag: "V", act: false, onTap: (){},),
-      _Buton(tag: "S", act: false, onTap: (){},)
-    ];
-  }
-*/

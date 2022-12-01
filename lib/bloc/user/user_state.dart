@@ -49,3 +49,19 @@ class CreateUserRoleError extends UserState {
   @override
   List<Object?> get props => [error];
 }
+
+//Adding origin and destination to user collection
+class CreateOriginDestination extends UserState {
+  final String origin;
+  final String destination;
+  CreateOriginDestination(this.origin, this.destination);
+  @override
+  List<Object?> get props => [origin, destination];
+}
+
+class CreateOriginDestinationError extends UserState {
+  final String error;
+  CreateOriginDestinationError(this.error);
+  @override
+  List<Object?> get props => [error];
+}
