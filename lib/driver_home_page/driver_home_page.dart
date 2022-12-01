@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rides_iteso/bloc/auth/auth_bloc.dart';
+import 'package:rides_iteso/bloc/routes/routes_bloc.dart';
 import 'package:rides_iteso/bloc/user/user_bloc.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/driver_home_page/driver_card.dart';
@@ -25,8 +26,9 @@ class _DriverHomePageState extends State<DriverHomePage> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<UserBloc>(context).state;
-    print('UserBloc: ${BlocProvider.of<UserBloc>(context).state}');
+    BlocProvider.of<RoutesBloc>(context).add(
+      GetRoutesRequested(),
+    );
   }
 
   Future<void> signOut() async {

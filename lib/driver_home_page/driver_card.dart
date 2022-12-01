@@ -14,6 +14,7 @@ class DriverCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(ride);
     return Padding(
       padding: const EdgeInsets.only(top: 5, bottom: 5),
       child: Container(
@@ -36,11 +37,11 @@ class DriverCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height:25),
+              SizedBox(height: 25),
               Row(
                 children: [
                   Text(
-                    "De: ${ride['from']}",
+                    "De: ${ride['origin']}",
                     style: const TextStyle(
                       color: Color(0xFF064789),
                       fontWeight: FontWeight.bold,

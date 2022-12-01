@@ -1,7 +1,9 @@
 part of 'routes_bloc.dart';
 
 abstract class RoutesState extends Equatable {
-  const RoutesState();
+  RoutesState();
+
+  List<dynamic> routes = [];
 }
 
 class Loading extends RoutesState {
