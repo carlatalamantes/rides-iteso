@@ -23,7 +23,7 @@ class RoutesBloc extends Bloc<RoutesEvent, RoutesState> {
     on<GetRoutesRequested>((event, emit) async {
       emit(Loading());
       try {
-        final routes = await RoutesC().getRoutes();
+        final routes = await RoutesC().getRoutes(event.getFutureRoutes);
         emit(GetRoutes(routes));
       } catch (e) {
         emit(GetRoutesError(e.toString()));
