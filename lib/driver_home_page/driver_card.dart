@@ -36,7 +36,7 @@ class DriverCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 25),
+              const SizedBox(height: 25),
               Row(
                 children: [
                   Text(
@@ -72,7 +72,7 @@ class DriverCard extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    "${ride['time']}",
+                    "${ride['dateList']}",
                     style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 14,
