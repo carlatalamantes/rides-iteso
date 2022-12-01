@@ -25,7 +25,7 @@ class UserC {
         'color': carColor,
         'plate': carPlate,
         'brand': carBrand,
-        'numPas': numPas,
+        'numPas': int.parse(numPas),
       }
     };
     await _firestore

@@ -11,8 +11,7 @@ class RoutesC {
     await _firestore.collection('users').doc(currentUser!.uid).get();
   }
 
-  Future<void> createRoute(
-      {required List<DateTime> dateList, required TimeOfDay time}) async {
+  Future<void> createRoute({required List<DateTime> dateList}) async {
     DocumentSnapshot<Map<String, dynamic>> snapshot =
         await _firestore.collection('users').doc(currentUser!.uid).get();
 
@@ -20,12 +19,11 @@ class RoutesC {
       //Create a new route
       await _firestore.collection('routes').add({
         'origin': snapshot.data()!['origin'],
-        'destination': snapshot.data()!['car']['numPas'],
+        'destination': snapshot.data()!['destination'],
         'driver': currentUser!.uid,
-        'date': dateList[i],
-        'time': time,
+        'dateList': dateList[i],
         'passengers': [],
-        'maxPassengers': snapshot.get('maxPassengers'),
+        'maxPassengers': snapshot.data()!['car']['numPas'],
       });
     }
 
