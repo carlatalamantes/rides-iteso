@@ -15,9 +15,16 @@ class CreateUserCarRequested extends UserEvent {
   final String carModel;
   final String carYear;
   final String carColor;
+  final String numPas;
   final String carPlate;
   final String carBrand;
 
   CreateUserCarRequested(
-      this.carModel, this.carYear, this.carColor, this.carPlate, this.carBrand);
+    this.carModel,
+    this.carYear,
+    this.carColor,
+    this.carPlate,
+    this.carBrand,
+    this.numPas,
+  );
 }
