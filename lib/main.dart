@@ -25,14 +25,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Rides ITESO',
-        home: const LoginPage(),
-        theme: ThemeData(
-            primaryColor: Colors.blue.shade900,
-            appBarTheme: const AppBarTheme(
-              iconTheme: IconThemeData(color: Colors.black),
-              backgroundColor: Colors.transparent,
-            )));
+      title: 'Rides ITESO',
+      home: const LoginPage(),
+      theme: ThemeData(
+        primaryColor: Colors.blue.shade900,
+        appBarTheme: const AppBarTheme(
+          iconTheme: IconThemeData(color: Colors.black),
+          backgroundColor: Colors.transparent,
+        ),
+      ),
+    );
   }
 }
 /*

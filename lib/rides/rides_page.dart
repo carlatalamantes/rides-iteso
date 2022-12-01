@@ -75,19 +75,21 @@ class _RidesPageState extends State<RidesPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   PassDrivButton(
-                      isDriver: isDriver,
-                      icon: Icons.car_rental,
-                      text: "CONDUCTOR",
-                      func: () {
-                        handleViewChange(context);
-                      }),
+                    isDriver: isDriver,
+                    icon: Icons.car_rental,
+                    text: "CONDUCTOR",
+                    func: () {
+                      handleViewChange(context);
+                    },
+                  ),
                   PassDrivButton(
-                      isDriver: !isDriver,
-                      icon: Icons.person,
-                      text: "PASAJERO",
-                      func: () {
-                        handleViewChange(context);
-                      }),
+                    isDriver: !isDriver,
+                    icon: Icons.person,
+                    text: "PASAJERO",
+                    func: () {
+                      handleViewChange(context);
+                    },
+                  ),
                 ],
               ),
               isDriver ? DriverRidePage() : const PassengerRidePage(),
