@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rides_iteso/bloc/user/user_bloc.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
-import 'package:rides_iteso/rides/rides_page.dart';
 
-class CarRegisterPage extends StatelessWidget {
-  CarRegisterPage({super.key});
+class CarRegisterPage extends StatefulWidget {
+  const CarRegisterPage({super.key});
+
+  @override
+  State<CarRegisterPage> createState() => _CarRegisterPageState();
+}
+
+class _CarRegisterPageState extends State<CarRegisterPage> {
   var marcaTextController = TextEditingController();
   var modeloTextController = TextEditingController();
   var colorTextController = TextEditingController();
+  var yearTextController = TextEditingController();
+  var plateTextController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,14 +57,6 @@ class CarRegisterPage extends StatelessWidget {
                   registrarAutoButton(context);
                 },
               ),
-              base_ElevatedButton(
-                text: 'Cancelar',
-                backgroundColor: Colors.white,
-                textColor: const Color(0xFF064789),
-                onPressed: () {
-                  cancelarButton(context);
-                },
-              ),
             ],
           ),
         ),
@@ -62,14 +64,16 @@ class CarRegisterPage extends StatelessWidget {
     );
   }
 
-  cancelarButton(BuildContext context) {
-    print("cacelar");
-    Navigator.pop(context);
-  }
-
   registrarAutoButton(BuildContext context) {
-    print("RegistrarAuto");
-    Navigator.pop(context);
+    BlocProvider.of<UserBloc>(context).add(
+      CreateUserCarRequested(
+        modeloTextController.text.trim(),
+        yearTextController.text.trim(),
+        colorTextController.text.trim(),
+        plateTextController.text.trim(),
+        marcaTextController.text.trim(),
+      ),
+    );
   }
 }
 

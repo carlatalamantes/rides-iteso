@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rides_iteso/bloc/auth/auth_bloc.dart';
-import 'package:rides_iteso/components/base_ElevatedButton.dart';
+import 'package:rides_iteso/bloc/user/user_bloc.dart';
 import 'package:rides_iteso/login/login_page.dart';
 import 'package:rides_iteso/rides/driver/driver_rides_page.dart';
 import 'package:rides_iteso/rides/pass_driv_button.dart';
@@ -10,7 +10,7 @@ import 'package:rides_iteso/rides/passenger/passenger_ride_page.dart';
 import '../bloc/auth/auth.dart';
 
 class RidesPage extends StatefulWidget {
-  RidesPage({Key? key}) : super(key: key);
+  const RidesPage({Key? key}) : super(key: key);
 
   @override
   _RidesPageState createState() => _RidesPageState();
@@ -18,6 +18,14 @@ class RidesPage extends StatefulWidget {
 
 class _RidesPageState extends State<RidesPage> {
   bool isDriver = true;
+  String userUid = '';
+
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<UserBloc>(context).state;
+    print('UserBloc: ${BlocProvider.of<UserBloc>(context).state}');
+  }
 
   Future<void> signOut() async {
     BlocProvider.of<AuthBloc>(context).add(SignOutRequested());
