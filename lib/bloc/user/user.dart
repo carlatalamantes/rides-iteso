@@ -31,4 +31,16 @@ class UserC {
         .doc(currentUser!.uid)
         .set(data, SetOptions(merge: true));
   }
+
+  Future<void> createUserRole({
+    required String role,
+  }) async {
+    final data = {
+      'role': role,
+    };
+    await _firestore
+        .collection('users')
+        .doc(currentUser!.uid)
+        .set(data, SetOptions(merge: true));
+  }
 }

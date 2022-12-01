@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rides_iteso/bloc/user/user_bloc.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
+import 'package:rides_iteso/ride_register/ride_register_page.dart';
 import 'package:rides_iteso/rides/rides_page.dart';
 
 class CarRegisterPage extends StatefulWidget {
@@ -39,10 +40,9 @@ class _CarRegisterPageState extends State<CarRegisterPage> {
               child: BlocConsumer<UserBloc, UserState>(
                 listener: (context, state) {
                   if (state is CreateUserCar) {
-                    //TODO: Navigate to carpool route
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                          builder: (context) => const RidesPage()),
+                          builder: (context) => RideRegisterPage()),
                     );
                   }
                   if (state is CreateUserCarError) {
@@ -96,7 +96,7 @@ class _CarRegisterPageState extends State<CarRegisterPage> {
                                 keyboardType: TextInputType.number),
                             base_TextFormField(
                               textController: numPasTextController,
-                              labelText: 'Num de pasajeros',
+                              labelText: 'Asientos disponibles',
                               keyboardType: TextInputType.number,
                               isRequired: true,
                             ),

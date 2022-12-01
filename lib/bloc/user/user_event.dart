@@ -28,3 +28,9 @@ class CreateUserCarRequested extends UserEvent {
     this.numPas,
   );
 }
+
+class CreateUserRoleRequested extends UserEvent {
+  final String role;
+
+  CreateUserRoleRequested(this.role);
+}

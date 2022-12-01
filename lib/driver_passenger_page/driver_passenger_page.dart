@@ -1,76 +1,91 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rides_iteso/bloc/user/user_bloc.dart';
 import 'package:rides_iteso/car_register/car_register_Page.dart';
 import 'package:rides_iteso/rides/pass_driv_button.dart';
 
 class DriverPassengerPage extends StatelessWidget {
-  const DriverPassengerPage({super.key});
+  DriverPassengerPage({super.key});
+  final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.black,
-        elevation: 0.0,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const Text(
-                  "Yo soy",
-                  style: TextStyle(fontSize: 30, color: Color(0xFF064789)),
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                Column(
+    return ScaffoldMessenger(
+        key: scaffoldMessengerKey,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            foregroundColor: Colors.black,
+            elevation: 0.0,
+          ),
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(20),
+            child: BlocConsumer<UserBloc, UserState>(
+              listener: (context, state) {
+                if (state is CreateUserRole) {
+                  if (state.role == "driver") {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                          builder: (context) => const CarRegisterPage()),
+                    );
+                  } else {
+                    //TODO: implementar
+                  }
+                }
+              },
+              builder: (context, state) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    PassDrivButton(
-                      isDriver: true,
-                      icon: Icons.person,
-                      text: "PASAJERO",
-                      func: () {
-                        imPassenger(context);
-                      },
-                    ),
-                    const SizedBox(
-                      height: 70,
-                    ),
-                    PassDrivButton(
-                      isDriver: true,
-                      icon: Icons.car_rental,
-                      text: "CONDUCTOR",
-                      func: () {
-                        imDriver(context);
-                      },
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        const Text(
+                          "Yo soy",
+                          style:
+                              TextStyle(fontSize: 30, color: Color(0xFF064789)),
+                        ),
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        Column(
+                          children: [
+                            PassDrivButton(
+                              isDriver: true,
+                              icon: Icons.person,
+                              text: "PASAJERO",
+                              func: () {
+                                setRole(context, 'passenger');
+                              },
+                            ),
+                            const SizedBox(
+                              height: 70,
+                            ),
+                            PassDrivButton(
+                              isDriver: true,
+                              icon: Icons.car_rental,
+                              text: "CONDUCTOR",
+                              func: () {
+                                setRole(context, 'driver');
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
-                ),
-              ],
+                );
+              },
             ),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
     /*
     return 
     */
   }
 
-  void imDriver(BuildContext context) {
-    print("driver");
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => const CarRegisterPage()),
-    );
-  }
-
-  void imPassenger(BuildContext context) {
-    print("driver");
-    //TODO: implementar
+  void setRole(BuildContext context, String role) {
+    BlocProvider.of<UserBloc>(context).add(CreateUserRoleRequested(role));
   }
 }
