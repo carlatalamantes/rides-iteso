@@ -60,6 +60,7 @@ class _RideCalendarState extends State<RideCalendar> {
                   // No need to call `setState()` here
                   _focusedDay = focusedDay;
                 },
+
                 calendarBuilders: CalendarBuilders(
                   defaultBuilder: (context, day, day2) {
                     if (checkIfItExist(day)) {
@@ -132,7 +133,7 @@ class _RideCalendarState extends State<RideCalendar> {
   saveButton(BuildContext context) {
     List<DateTime> newList = dateList
         .map((arguments) => DateTime(arguments.year, arguments.month,
-            arguments.day, time!.hour, time!.minute))
+            arguments.day, time.hour, time.minute))
         .toList();
     print(time);
     print(dateList);
