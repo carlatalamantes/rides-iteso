@@ -8,10 +8,11 @@ class DriverCard extends StatelessWidget {
     required this.ride,
   }) : super(key: key);
 
-  final Map<String, dynamic> ride;
+  final Map<dynamic, dynamic> ride;
 
   @override
   Widget build(BuildContext context) {
+    print(ride);
     return Padding(
       padding: const EdgeInsets.only(top: 5, bottom: 5),
       child: Container(
@@ -34,11 +35,11 @@ class DriverCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height:25),
+              SizedBox(height: 25),
               Row(
                 children: [
                   Text(
-                    "De: ${ride['from']}",
+                    "De: ${ride['origin']}",
                     style: const TextStyle(
                       color: Color(0xFF064789),
                       fontWeight: FontWeight.bold,
@@ -57,7 +58,7 @@ class DriverCard extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height:10),
+              SizedBox(height: 10),
               Text(
                 "Hacia: ${ride['to']}",
                 style: const TextStyle(

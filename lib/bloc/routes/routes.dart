@@ -38,7 +38,6 @@ class RoutesC {
     List routes = [];
     await _firestore.collection('routes').get().then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
-        print(result.data());
         routes.add(result.data());
       });
     });

@@ -6,6 +6,7 @@ part 'routes_state.dart';
 part 'routes_event.dart';
 
 class RoutesBloc extends Bloc<RoutesEvent, RoutesState> {
+  List<dynamic> routes = [];
   RoutesBloc() : super(Routes()) {
     on<CreateRouteRequested>((event, emit) async {
       emit(Loading());

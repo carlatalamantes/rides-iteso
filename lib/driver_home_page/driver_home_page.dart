@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rides_iteso/bloc/auth/auth_bloc.dart';
+import 'package:rides_iteso/bloc/routes/routes_bloc.dart';
 import 'package:rides_iteso/bloc/user/user_bloc.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/driver_home_page/driver_card.dart';
@@ -25,8 +26,9 @@ class _DriverHomePageState extends State<DriverHomePage> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<UserBloc>(context).state;
-    print('UserBloc: ${BlocProvider.of<UserBloc>(context).state}');
+    BlocProvider.of<RoutesBloc>(context).add(
+      GetRoutesRequested(),
+    );
   }
 
   Future<void> signOut() async {
@@ -59,54 +61,25 @@ class _DriverHomePageState extends State<DriverHomePage> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(10),
-        child: Center(
-          child: Column(
-            children: [
-              SingleChildScrollView(
-                child: Center(
-                  child: Column(
-                    children: [
-                      const Center(
-                        child: Text(
-                          'Pickup',
-                          style: TextStyle(fontSize: 16, color: Colors.grey),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const DriverCard(
-                        ride: {
-                          "registererd": 1,
-                          "passengerLimit": 4,
-                          "time": "16:00",
-                          "from": "ITESO",
-                          "to": "Plaza del Sol"
-                        },
-                      ),
-                      base_ElevatedButton(
-                        text: "Añadir dias",
-                        backgroundColor: const Color(0xFF064789),
-                        onPressed: () {
-                          addDates();
-                        },
-                      ),
-                      base_ElevatedButton(
-                        text: "Future Days",
-                        backgroundColor: const Color(0xFF064789),
-                        onPressed: () {
-                          addDates();
-                        },
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+      body: BlocConsumer<RoutesBloc, RoutesState>(
+        listener: (context, state) {
+          //Print routes
+          if (state is GetRoutes) {
+            print(state.routes);
+          }
+        },
+        builder: (context, state) {
+          return ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemCount: BlocProvider.of<RoutesBloc>(context).routes.length,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                    onTap: () => {},
+                    child: DriverCard(
+                      ride: BlocProvider.of<RoutesBloc>(context).routes[index],
+                    ));
+              });
+        },
       ),
     );
   }
