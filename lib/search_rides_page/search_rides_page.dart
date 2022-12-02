@@ -16,6 +16,7 @@ class _SearchRidesPageState extends State<SearchRidesPage> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
+  var zoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +58,11 @@ class _SearchRidesPageState extends State<SearchRidesPage> {
                   // No need to call `setState()` here
                   _focusedDay = focusedDay;
                 },
+              ),
+              base_TextFormField(
+                textController: zoneController,
+                labelText: 'Zona',
+                isRequired: true,
               ),
               base_ElevatedButton(
                 text: 'BUSCAR RIDE',
