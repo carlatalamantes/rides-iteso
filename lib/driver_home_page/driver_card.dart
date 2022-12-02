@@ -75,7 +75,7 @@ class DriverCard extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    "${(ride['dateList'])}",
+                    "${ride['dateList'].toDate().day}/${ride['dateList'].toDate().month}/${ride['dateList'].toDate().year}",
                     style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 14,
