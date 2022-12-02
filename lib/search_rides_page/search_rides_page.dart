@@ -18,6 +18,7 @@ class _SearchRidesPageState extends State<SearchRidesPage> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
+  var zoneController = TextEditingController();
 
   @override
   void initState() {
