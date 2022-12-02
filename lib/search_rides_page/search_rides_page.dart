@@ -77,7 +77,7 @@ class _SearchRidesPageState extends State<SearchRidesPage> {
               ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: 1, //state.routes.length,
+                itemCount: 0, //state.routes.length,
                 itemBuilder: (context, index) {
                   return const SearchCard(
                     ride: {
