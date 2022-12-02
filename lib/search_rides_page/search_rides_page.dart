@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rides_iteso/bloc/passenger/passenger_bloc.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
 import 'package:rides_iteso/rides/rides_page.dart';
@@ -18,86 +20,89 @@ class _SearchRidesPageState extends State<SearchRidesPage> {
   DateTime? _selectedDay;
 
   @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<PassengerBloc>(context).add(GetRoutesRequested());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.black,
-        elevation: 0.0,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: Center(
-          child: Column(
-            children: [
-              TableCalendar(
-                firstDay: DateTime.utc(2010, 10, 16),
-                lastDay: DateTime.utc(2030, 3, 14),
-                focusedDay: _focusedDay,
-                availableCalendarFormats: const {CalendarFormat.month: 'Month'},
-                calendarFormat: _calendarFormat,
-                selectedDayPredicate: (day) {
-                  // Use `selectedDayPredicate` to determine which day is currently selected.
-                  // If this returns true, then `day` will be marked as selected.
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          foregroundColor: Colors.black,
+          elevation: 0.0,
+        ),
+        body: BlocConsumer<PassengerBloc, PassengerState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            return SingleChildScrollView(
+              padding: const EdgeInsets.all(20),
+              child: Center(
+                child: Column(
+                  children: [
+                    TableCalendar(
+                      firstDay: DateTime.utc(2010, 10, 16),
+                      lastDay: DateTime.utc(2030, 3, 14),
+                      focusedDay: _focusedDay,
+                      availableCalendarFormats: const {
+                        CalendarFormat.month: 'Month'
+                      },
+                      calendarFormat: _calendarFormat,
+                      selectedDayPredicate: (day) {
+                        // Use `selectedDayPredicate` to determine which day is currently selected.
+                        // If this returns true, then `day` will be marked as selected.
 
-                  // Using `isSameDay` is recommended to disregard
-                  // the time-part of compared DateTime objects.
-                  return isSameDay(_selectedDay, day);
-                },
-                onDaySelected: (selectedDay, focusedDay) {
-                  if (!isSameDay(_selectedDay, selectedDay)) {
-                    // Call `setState()` when updating the selected day
-                    setState(() {
-                      _selectedDay = selectedDay;
-                      _focusedDay = focusedDay;
-                    });
-                  }
-                },
-                onPageChanged: (focusedDay) {
-                  // No need to call `setState()` here
-                  _focusedDay = focusedDay;
-                },
-              ),
-              base_ElevatedButton(
-                text: 'BUSCAR RIDE',
-                backgroundColor: const Color(0xFF064789),
-                onPressed: () {
-                  buscarRide();
-                },
-              ),
-              const Center(
-                child: Text(
-                  'Mis rides para hoy',
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                        // Using `isSameDay` is recommended to disregard
+                        // the time-part of compared DateTime objects.
+                        return isSameDay(_selectedDay, day);
+                      },
+                      onDaySelected: (selectedDay, focusedDay) {
+                        if (!isSameDay(_selectedDay, selectedDay)) {
+                          // Call `setState()` when updating the selected day
+                          setState(() {
+                            _selectedDay = selectedDay;
+                            _focusedDay = focusedDay;
+                          });
+                        }
+                      },
+                      onPageChanged: (focusedDay) {
+                        // No need to call `setState()` here
+                        _focusedDay = focusedDay;
+                      },
+                    ),
+                    base_ElevatedButton(
+                      text: 'BUSCAR RIDE',
+                      backgroundColor: const Color(0xFF064789),
+                      onPressed: () {
+                        buscarRide();
+                      },
+                    ),
+                    /*   const Center(
+                      child: Text(
+                        'Rides',
+                        style: TextStyle(fontSize: 16, color: Colors.grey),
+                      ),
+                    ), */
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: state.routes.length, //state.routes.length,
+                      itemBuilder: (context, index) {
+                        return SearchCard(
+                          ride: state.routes[index],
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: 0, //state.routes.length,
-                itemBuilder: (context, index) {
-                  return const SearchCard(
-                    ride: {
-                      "name": "Juan Perez torrez ",
-                      "brand": 'Nissan',
-                      "model": 'Versa',
-                      "color": 'Rojo',
-                      "location": 'Plaza del Sol',
-                      "registererd": "3",
-                      "passengerLimit": "4",
-                      "time": "16:00",
-                    },
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+            );
+          },
+        ));
   }
 }
 

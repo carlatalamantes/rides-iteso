@@ -70,7 +70,7 @@ class SearchCard extends StatelessWidget {
                   ),
                   const Spacer(),
                   const Text(
-                    "Salir del ride",
+                    "Unirme al ride",
                     style: TextStyle(color: Color(0xFF064789)),
                   ),
                 ],
