@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rides_iteso/bloc/passenger/passenger_bloc.dart';
 
 class SearchCard extends StatelessWidget {
   const SearchCard({
@@ -69,9 +71,15 @@ class SearchCard extends StatelessWidget {
                     style: const TextStyle(color: Color(0xFF064789)),
                   ),
                   const Spacer(),
-                  const Text(
-                    "Unirme al ride",
-                    style: TextStyle(color: Color(0xFF064789)),
+                  GestureDetector(
+                    onTap: () {
+                      BlocProvider.of<PassengerBloc>(context)
+                          .add(JoinRouteRequested(ride['id']));
+                    },
+                    child: const Text(
+                      "Unirme al ride",
+                      style: TextStyle(color: Color(0xFF064789)),
+                    ),
                   ),
                 ],
               ),
