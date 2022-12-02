@@ -79,7 +79,8 @@ class PassengerCard extends StatelessWidget {
                         ),
                         const Spacer(),
                         Text(
-                          "${ride['dateList']}:${ride['dateList']}",
+                          "${ride['dateList'].toDate().day}/${ride['dateList'].toDate().month}/${ride['dateList'].toDate().year}",
+                          //"${ride['dateList']}:${ride['dateList']}",
                           style: const TextStyle(
                             color: Colors.grey,
                             fontSize: 14,
