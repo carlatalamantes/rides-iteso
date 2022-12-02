@@ -17,6 +17,16 @@ class PassengerBloc extends Bloc<PassengerEvent, PassengerState> {
       }
     });
 
+    on<GetJoinedRoutesRequested>((event, emit) async {
+      emit(Loading());
+      try {
+        final routes = await PassengerC().getJoinedRoutes();
+        emit(GetJoinedRoutes(routes));
+      } catch (e) {
+        emit(GetJoinedRoutesError(e.toString()));
+      }
+    });
+
     on<JoinRouteRequested>((event, emit) async {
       emit(Loading());
       try {

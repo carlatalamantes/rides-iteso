@@ -13,17 +13,42 @@ class PassengerC {
   //Get routes from firestore and return a list of routes
   Future<List> getRoutes() async {
     List routes = [];
-    await _firestore.collection('routes').get().then((querySnapshot) {
-      querySnapshot.docs.forEach((result) {
-        var temp = result.data()['dateList'].toDate();
-        var temp2 = DateTime.now();
-        if (temp.year == temp2.year &&
-            temp.month == temp2.month &&
-            temp.day == temp2.day) {
-          routes.add(result.data());
-        }
-      });
-    });
+    await _firestore
+        .collection('routes')
+        .where('passengers', whereNotIn: [currentUser!.uid])
+        .get()
+        .then((querySnapshot) {
+          querySnapshot.docs.forEach((result) {
+            var temp = result.data()['dateList'].toDate();
+            var temp2 = DateTime.now();
+            if (temp.year == temp2.year &&
+                temp.month == temp2.month &&
+                temp.day == temp2.day) {
+              routes.add(result.data());
+            }
+          });
+        });
+    return routes;
+  }
+
+  //Get joined routes from firestore and return a list of routes
+  Future<List> getJoinedRoutes() async {
+    List routes = [];
+    await _firestore
+        .collection('routes')
+        .where('passengers', arrayContains: currentUser!.uid)
+        .get()
+        .then((querySnapshot) => {
+              querySnapshot.docs.forEach((result) {
+                var temp = result.data()['dateList'].toDate();
+                var temp2 = DateTime.now();
+                if (temp.year == temp2.year &&
+                    temp.month == temp2.month &&
+                    temp.day == temp2.day) {
+                  routes.add(result.data());
+                }
+              })
+            });
     return routes;
   }
 

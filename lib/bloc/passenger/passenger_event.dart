@@ -5,9 +5,14 @@ abstract class PassengerEvent extends Equatable {
   List<Object> get props => [];
 }
 
-//Get routes
+//Get routes that the user is not in
 class GetRoutesRequested extends PassengerEvent {
   GetRoutesRequested();
+}
+
+//Get routes that the user is in
+class GetJoinedRoutesRequested extends PassengerEvent {
+  GetJoinedRoutesRequested();
 }
 
 //Join route

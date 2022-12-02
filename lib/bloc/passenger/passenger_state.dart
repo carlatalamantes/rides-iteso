@@ -30,6 +30,21 @@ class GetRoutesError extends PassengerState {
   List<Object?> get props => [error];
 }
 
+//Get routes that the user is in
+class GetJoinedRoutes extends PassengerState {
+  final List<dynamic> routes;
+  GetJoinedRoutes(this.routes);
+  @override
+  List<Object?> get props => [routes];
+}
+
+class GetJoinedRoutesError extends PassengerState {
+  final String error;
+  GetJoinedRoutesError(this.error);
+  @override
+  List<Object?> get props => [error];
+}
+
 //Joining routes
 class JoinRoute extends PassengerState {
   @override

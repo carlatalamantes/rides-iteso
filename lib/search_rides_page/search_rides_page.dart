@@ -4,8 +4,8 @@ import 'package:rides_iteso/components/base_TextFormField.dart';
 import 'package:rides_iteso/rides/rides_page.dart';
 import 'package:rides_iteso/search_rides_page/search_ride_card.dart';
 
-class SearchRegisterPage extends StatelessWidget {
-  SearchRegisterPage({super.key});
+class SearchRidesPage extends StatelessWidget {
+  SearchRidesPage({super.key});
   var diaTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -25,31 +25,49 @@ class SearchRegisterPage extends StatelessWidget {
                 labelText: 'Dia',
               ),
               base_ElevatedButton(
-                text: 'Buscar Ride',
+                text: 'BUSCAR RIDE',
                 backgroundColor: const Color(0xFF064789),
                 onPressed: () {
-                  registrarAutoButton(context);
+                  buscarRide();
                 },
               ),
-              const SearchCard(
-                ride: {
-                  "name": "Juan Perez torrez ",
-                  "brand": 'Nissan',
-                  "model": 'Versa',
-                  "color": 'Rojo',
-                  "location": 'Plaza del Sol',
-                  "registererd": "3",
-                  "passengerLimit": "4",
-                  "time": "16:00",
-                },
-              ),
-              base_ElevatedButton(
-                text: 'Cancelar',
-                backgroundColor: Colors.white,
-                textColor: const Color(0xFF064789),
-                onPressed: () {
-                  cancelarButton(context);
-                },
+              Column(
+                children: [
+                  Center(
+                    child: Column(
+                      children: [
+                        const Center(
+                          child: Text(
+                            'Mis rides para hoy',
+                            style: TextStyle(fontSize: 16, color: Colors.grey),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: state.routes.length,
+                          itemBuilder: (context, index) {
+                            return const SearchCard(
+                              ride: {
+                                "name": "Juan Perez torrez ",
+                                "brand": 'Nissan',
+                                "model": 'Versa',
+                                "color": 'Rojo',
+                                "location": 'Plaza del Sol',
+                                "registererd": "3",
+                                "passengerLimit": "4",
+                                "time": "16:00",
+                              },
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -57,17 +75,9 @@ class SearchRegisterPage extends StatelessWidget {
       ),
     );
   }
-
-  cancelarButton(BuildContext context) {
-    print("cacelar");
-    Navigator.pop(context);
-  }
-
-  registrarAutoButton(BuildContext context) {
-    print("RegistrarAuto");
-    Navigator.pop(context);
-  }
 }
+
+buscarRide() {}
 
 
 

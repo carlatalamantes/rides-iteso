@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rides_iteso/bloc/auth/auth_bloc.dart';
 import 'package:rides_iteso/bloc/passenger/passenger_bloc.dart';
+import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/login/login_page.dart';
 import 'package:rides_iteso/passenger_home_page/passenger_card.dart';
 import 'package:rides_iteso/ride_calendar/ride_calendar.dart';
+import 'package:rides_iteso/search_rides_page/search_rides_page.dart';
 
 class PassengerHomePage extends StatefulWidget {
   const PassengerHomePage({super.key});
@@ -21,7 +23,7 @@ class _PassengerHomePage extends State<PassengerHomePage> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<PassengerBloc>(context).add(GetRoutesRequested());
+    BlocProvider.of<PassengerBloc>(context).add(GetJoinedRoutesRequested());
   }
 
   Future<void> signOut() async {
@@ -66,7 +68,7 @@ class _PassengerHomePage extends State<PassengerHomePage> {
                     children: [
                       const Center(
                         child: Text(
-                          'Pickup',
+                          'Mis rides para hoy',
                           style: TextStyle(fontSize: 16, color: Colors.grey),
                         ),
                       ),
@@ -74,7 +76,7 @@ class _PassengerHomePage extends State<PassengerHomePage> {
                         height: 10,
                       ),
                       ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: state.routes.length,
                         itemBuilder: (context, index) {
@@ -83,6 +85,17 @@ class _PassengerHomePage extends State<PassengerHomePage> {
                           );
                         },
                       ),
+                      base_ElevatedButton(
+                        text: 'BUSCAR RIDE',
+                        backgroundColor: const Color(0xFF064789),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => SearchRidesPage(),
+                            ),
+                          );
+                        },
+                      )
                     ],
                   ),
                 ),
