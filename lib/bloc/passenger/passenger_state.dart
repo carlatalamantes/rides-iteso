@@ -17,14 +17,22 @@ class Routes extends PassengerState {
 }
 
 // Getting routes
-class GetRoutes extends PassengerState {
+/* class GetRoutes extends PassengerState {
   final List<dynamic> routes;
   GetRoutes(this.routes);
   @override
   List<Object?> get props => [routes];
 }
 
-// Getting routes
+
+class GetRoutesError extends PassengerState {
+  final String error;
+  GetRoutesError(this.error);
+  @override
+  List<Object?> get props => [error];
+} */
+
+// Getting routes that the user is not in
 class GetSearchRoutes extends PassengerState {
   final List<dynamic> routesSearch;
   GetSearchRoutes(this.routesSearch);
@@ -35,13 +43,6 @@ class GetSearchRoutes extends PassengerState {
 class GetRoutesSearchError extends PassengerState {
   final String error;
   GetRoutesSearchError(this.error);
-  @override
-  List<Object?> get props => [error];
-}
-
-class GetRoutesError extends PassengerState {
-  final String error;
-  GetRoutesError(this.error);
   @override
   List<Object?> get props => [error];
 }

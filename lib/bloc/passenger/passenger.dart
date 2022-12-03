@@ -19,14 +19,22 @@ class PassengerC {
         .get()
         .then(
           (querySnapshot) {
-            querySnapshot.docs.forEach((result) {
-              var temp = result.data()['dateList'].toDate();
-              var temp2 = DateTime.now();
-              if (temp.year == temp2.year &&
-                  temp.month == temp2.month &&
-                  temp.day == temp2.day) {
-                routes.add(result.data());
-              }
+            //Get car from users collection
+            querySnapshot.docs.forEach((doc) async {
+              await _firestore
+                  .collection('users')
+                  .doc(doc['driver'])
+                  .get()
+                  .then((value) {
+                var car = value.data()!['car'];
+                var temp = doc.data()['dateList'].toDate();
+                var temp2 = DateTime.now();
+                if (temp.year == temp2.year &&
+                    temp.month == temp2.month &&
+                    temp.day == temp2.day) {
+                  routes.add({...doc.data(), 'car': car});
+                }
+              });
             });
           },
         );
@@ -75,8 +83,17 @@ class PassengerC {
 
   //Join route
   Future<void> joinRoute(String routeId) async {
-    await _firestore.collection('routes').doc(routeId).update({
-      'passengers': FieldValue.arrayUnion([currentUser!.uid])
+    //Check if the route is full comparint passengers and maxPassengers
+    await _firestore.collection('routes').doc(routeId).get().then((value) {
+      if (value.data()!['passengers'].length < value.data()!['maxPassengers']) {
+        _firestore.collection('routes').doc(routeId).update({
+          'passengers': FieldValue.arrayUnion([currentUser!.uid])
+        });
+      } else {
+        throw ('Route is full');
+      }
+    }).catchError((e) {
+      throw (e);
     });
   }
 

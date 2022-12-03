@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:rides_iteso/bloc/auth/auth_bloc.dart';
 import 'package:rides_iteso/bloc/user/user_bloc.dart';
-import 'package:rides_iteso/driver_home_page/driver_home_page.dart';
 import 'package:rides_iteso/login/login_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

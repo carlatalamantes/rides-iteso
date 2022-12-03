@@ -9,13 +9,13 @@ class PassengerBloc extends Bloc<PassengerEvent, PassengerState> {
   List<dynamic> searchRoutes = [];
 
   PassengerBloc() : super(Routes()) {
-    on<GetRoutesRequested>((event, emit) async {
+    on<GetRoutesSearchRequested>((event, emit) async {
       emit(Loading());
       try {
         final searchRoutes = await PassengerC().getRoutes();
-        emit(GetRoutes(searchRoutes));
+        emit(GetSearchRoutes(searchRoutes));
       } catch (e) {
-        emit(GetRoutesError(e.toString()));
+        emit(GetRoutesSearchError(e.toString()));
       }
     });
 
@@ -35,7 +35,7 @@ class PassengerBloc extends Bloc<PassengerEvent, PassengerState> {
         await PassengerC().joinRoute(event.routeId);
         emit(JoinRoute());
       } catch (e) {
-        emit(JoinRouteError(e.toString()));
+        emit(JoinRouteError("Route is full"));
       }
     });
 
