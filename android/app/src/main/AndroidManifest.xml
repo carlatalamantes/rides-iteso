@@ -2,7 +2,7 @@
     package="com.example.rides_iteso">
    <application
         android:label="rides_iteso"
-        android:name="${applicationName}"
+        android:name="RIDES ITESO"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
