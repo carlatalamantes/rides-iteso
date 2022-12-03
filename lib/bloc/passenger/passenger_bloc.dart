@@ -6,13 +6,14 @@ part 'passenger_event.dart';
 
 class PassengerBloc extends Bloc<PassengerEvent, PassengerState> {
   List<dynamic> routes = [];
+  List<dynamic> searchRoutes = [];
+
   PassengerBloc() : super(Routes()) {
-    
     on<GetRoutesRequested>((event, emit) async {
       emit(Loading());
       try {
-        final searchedRoutes = await PassengerC().getRoutes();
-        emit(GetRoutes(routes));
+        final searchRoutes = await PassengerC().getRoutes();
+        emit(GetRoutes(searchRoutes));
       } catch (e) {
         emit(GetRoutesError(e.toString()));
       }

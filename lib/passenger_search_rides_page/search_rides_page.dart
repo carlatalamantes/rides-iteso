@@ -90,13 +90,12 @@ class _SearchRidesPageState extends State<SearchRidesPage> {
                     ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: state.routes.length, //state.searchedRoutes.length,
+                      itemCount:
+                          state.routes.length, //state.searchedRoutes.length,
                       itemBuilder: (context, index) {
                         print(state.routes);
                         return SearchCard(
-                          ride: state.routes[index],
-                          index: index
-                        );
+                            ride: state.routes[index], index: index);
                       },
                     ),
                   ],

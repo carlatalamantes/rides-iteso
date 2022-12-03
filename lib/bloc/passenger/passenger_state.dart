@@ -32,6 +32,13 @@ class GetSearchRoutes extends PassengerState {
   List<Object?> get props => [routesSearch];
 }
 
+class GetRoutesSearchError extends PassengerState {
+  final String error;
+  GetRoutesSearchError(this.error);
+  @override
+  List<Object?> get props => [error];
+}
+
 class GetRoutesError extends PassengerState {
   final String error;
   GetRoutesError(this.error);

@@ -15,6 +15,10 @@ class GetJoinedRoutesRequested extends PassengerEvent {
   GetJoinedRoutesRequested();
 }
 
+class GetRoutesSearchRequested extends PassengerEvent {
+  GetRoutesSearchRequested();
+}
+
 //Join route
 class JoinRouteRequested extends PassengerEvent {
   final String routeId;
