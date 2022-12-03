@@ -6,7 +6,7 @@ import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/login/login_page.dart';
 import 'package:rides_iteso/passenger_home_page/passenger_card.dart';
 import 'package:rides_iteso/ride_calendar/ride_calendar.dart';
-import 'package:rides_iteso/search_rides_page/search_rides_page.dart';
+import 'package:rides_iteso/passenger_search_rides_page/search_rides_page.dart';
 
 class PassengerHomePage extends StatefulWidget {
   const PassengerHomePage({super.key});

@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rides_iteso/bloc/passenger/passenger_bloc.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
-import 'package:rides_iteso/rides/rides_page.dart';
-import 'package:rides_iteso/search_rides_page/search_ride_card.dart';
+import 'package:rides_iteso/passenger_search_rides_page/search_ride_card.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class SearchRidesPage extends StatefulWidget {
@@ -91,10 +90,12 @@ class _SearchRidesPageState extends State<SearchRidesPage> {
                     ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: state.routes.length, //state.routes.length,
+                      itemCount: state.routes.length, //state.searchedRoutes.length,
                       itemBuilder: (context, index) {
+                        print(state.routes);
                         return SearchCard(
                           ride: state.routes[index],
+                          index: index
                         );
                       },
                     ),

@@ -7,7 +7,6 @@ import 'package:rides_iteso/components/base_TextFormField.dart';
 import 'package:rides_iteso/driver_home_page/driver_home_page.dart';
 import 'package:rides_iteso/driver_passenger_page/driver_passenger_page.dart';
 import 'package:rides_iteso/passenger_home_page/passenger_home_page.dart';
-import 'package:rides_iteso/rides/rides_page.dart';
 import 'package:rides_iteso/signup/signupPage.dart';
 
 class LoginPage extends StatefulWidget {

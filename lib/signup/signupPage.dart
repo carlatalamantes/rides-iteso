@@ -5,7 +5,6 @@ import 'package:rides_iteso/bloc/auth/auth_bloc.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
 import 'package:rides_iteso/driver_passenger_page/driver_passenger_page.dart';
-import 'package:rides_iteso/rides/rides_page.dart';
 
 class SignupPage extends StatelessWidget {
   SignupPage({super.key});

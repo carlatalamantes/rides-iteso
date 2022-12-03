@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rides_iteso/bloc/user/user_bloc.dart';
 import 'package:rides_iteso/car_register/car_register_Page.dart';
 import 'package:rides_iteso/passenger_home_page/passenger_home_page.dart';
-import 'package:rides_iteso/rides/pass_driv_button.dart';
+import 'package:rides_iteso/driver_passenger_page/pass_driv_button.dart';
 
 class DriverPassengerPage extends StatelessWidget {
   DriverPassengerPage({super.key});

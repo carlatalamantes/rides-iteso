@@ -6,9 +6,11 @@ class SearchCard extends StatelessWidget {
   const SearchCard({
     Key? key,
     required this.ride,
+    required this.index,
   }) : super(key: key);
 
   final Map<String, dynamic> ride;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class SearchCard extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${ride['name']}",
+                    "Incia en: ${ride['origin']}",
                     style: const TextStyle(
                       color: Color(0xFF064789),
                       fontWeight: FontWeight.bold,
@@ -51,23 +53,28 @@ class SearchCard extends StatelessWidget {
                     size: 30,
                   ),
                   Text(
-                    "${ride['registererd']}/${ride['passengerLimit']}",
+                    "${ride['passengers'].length}/${ride['maxPassengers']}",
                     style: const TextStyle(color: Colors.grey),
                   ),
                 ],
               ),
               Text(
-                "${ride['brand']} ${ride['model']} ${ride['color']}",
-                style: const TextStyle(color: Colors.grey),
+                "destino: ${ride['destination']}",
+                style: const TextStyle(
+                  color: Color(0xFF064789),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
               ),
               Text(
-                "${ride['location']}",
+                "poner Carro",
+                //"${ride['']} ${ride['model']} ${ride['color']}",
                 style: const TextStyle(color: Colors.grey),
               ),
               Row(
                 children: [
                   Text(
-                    "${ride['time']}",
+                    "${ride['dateList'].toDate().day}/${ride['dateList'].toDate().month}/${ride['dateList'].toDate().year}",
                     style: const TextStyle(color: Color(0xFF064789)),
                   ),
                   const Spacer(),
@@ -76,9 +83,14 @@ class SearchCard extends StatelessWidget {
                       BlocProvider.of<PassengerBloc>(context)
                           .add(JoinRouteRequested(ride['id']));
                     },
-                    child: const Text(
-                      "Unirme al ride",
-                      style: TextStyle(color: Color(0xFF064789)),
+                    child: GestureDetector(
+                      child: const Text(
+                        "Unirme al ride",
+                        style: TextStyle(color: Color(0xFF064789)),
+                      ),
+                      onTap: () {
+                        btnUnirmeAlRide();
+                      },
                     ),
                   ),
                 ],
@@ -88,5 +100,9 @@ class SearchCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  btnUnirmeAlRide() {
+    print(index);
   }
 }

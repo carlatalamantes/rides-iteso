@@ -3,6 +3,7 @@ part of 'passenger_bloc.dart';
 abstract class PassengerState extends Equatable {
   PassengerState();
   List<dynamic> routes = [];
+  List<dynamic> routesSearch = [];
 }
 
 class Loading extends PassengerState {
@@ -21,6 +22,14 @@ class GetRoutes extends PassengerState {
   GetRoutes(this.routes);
   @override
   List<Object?> get props => [routes];
+}
+
+// Getting routes
+class GetSearchRoutes extends PassengerState {
+  final List<dynamic> routesSearch;
+  GetSearchRoutes(this.routesSearch);
+  @override
+  List<Object?> get props => [routesSearch];
 }
 
 class GetRoutesError extends PassengerState {

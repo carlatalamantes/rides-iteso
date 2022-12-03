@@ -4,7 +4,6 @@ import 'package:rides_iteso/bloc/user/user_bloc.dart';
 import 'package:rides_iteso/components/base_ElevatedButton.dart';
 import 'package:rides_iteso/components/base_TextFormField.dart';
 import 'package:rides_iteso/ride_register/ride_register_page.dart';
-import 'package:rides_iteso/rides/rides_page.dart';
 
 class CarRegisterPage extends StatefulWidget {
   const CarRegisterPage({super.key});
