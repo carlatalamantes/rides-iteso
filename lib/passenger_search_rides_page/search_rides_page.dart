@@ -40,6 +40,7 @@ class _SearchRidesPageState extends State<SearchRidesPage> {
             ),
             body: BlocConsumer<PassengerBloc, PassengerState>(
               listener: (context, state) {
+                print(state.routesSearch);
                 if (state is JoinRouteError) {
                   scaffoldMessengerKey.currentState?.showSnackBar(
                     const SnackBar(
@@ -50,78 +51,35 @@ class _SearchRidesPageState extends State<SearchRidesPage> {
                 }
               },
               builder: (context, state) {
-                return SingleChildScrollView(
-                  padding: const EdgeInsets.all(20),
-                  child: Center(
-                    child: Column(
-                      children: [
-                        TableCalendar(
-                          firstDay: DateTime.utc(2010, 10, 16),
-                          lastDay: DateTime.utc(2030, 3, 14),
-                          focusedDay: _focusedDay,
-                          availableCalendarFormats: const {
-                            CalendarFormat.month: 'Month'
-                          },
-                          calendarFormat: _calendarFormat,
-                          selectedDayPredicate: (day) {
-                            // Use `selectedDayPredicate` to determine which day is currently selected.
-                            // If this returns true, then `day` will be marked as selected.
-
-                            // Using `isSameDay` is recommended to disregard
-                            // the time-part of compared DateTime objects.
-                            return isSameDay(_selectedDay, day);
-                          },
-                          onDaySelected: (selectedDay, focusedDay) {
-                            if (!isSameDay(_selectedDay, selectedDay)) {
-                              // Call `setState()` when updating the selected day
-                              setState(() {
-                                _selectedDay = selectedDay;
-                                _focusedDay = focusedDay;
-                              });
-                            }
-                          },
-                          onPageChanged: (focusedDay) {
-                            // No need to call `setState()` here
-                            _focusedDay = focusedDay;
-                          },
-                        ),
-                        base_TextFormField(
-                          textController: zoneController,
-                          labelText: 'Zona',
-                          isRequired: true,
-                        ),
-                        base_ElevatedButton(
-                          text: 'Buscar Ride',
-                          backgroundColor: const Color(0xFF064789),
-                          onPressed: () {
-                            buscarRide();
-                          },
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: state.routesSearch.length,
-                          itemBuilder: (context, index) {
-                            return SearchCard(
-                                ride: state.routesSearch[index], index: index);
-                          },
-                        ),
-                      ],
+                if (state.routes.isEmpty) {
+                  return const Center(
+                    child: Text("No hay rutas disponibles para el día de hoy"),
+                  );
+                } else {
+                  return SingleChildScrollView(
+                    padding: const EdgeInsets.all(20),
+                    child: Center(
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: state.routesSearch.length,
+                            itemBuilder: (context, index) {
+                              return SearchCard(
+                                  ride: state.routesSearch[index],
+                                  index: index);
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                );
+                  );
+                }
               },
             )));
-  }
-
-  buscarRide() {
-    print(_focusedDay);
-    print(zoneController.text);
-    /*
-    emitir evento
-    */
   }
 }
