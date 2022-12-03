@@ -13,9 +13,6 @@ class PassengerC {
   //Get routes from firestore and return a list of routes
   Future<List> getRoutes() async {
     List routes = [];
-    List filteredRoutes = [];
-    List allRoutes = [];
-    List dayRoutes = [];
     await _firestore
         .collection('routes')
         .where('passengers', whereNotIn: [currentUser!.uid])
@@ -35,6 +32,25 @@ class PassengerC {
         );
     return routes;
   }
+
+  /*
+  
+    await _firestore
+        .collection('routes')
+        .where('passengers', whereNotIn: [currentUser!.uid])
+        .where('zone', equals: [zone])
+        .get()
+        .then(
+          (querySnapshot) {
+            querySnapshot.docs.forEach((result) {
+              var quevienedelquery = result.data()['dateList'].toDate();
+              var queEvento = //viene del evento
+              if (quevienedelquery.year == queEvento.year &&
+                  quevienedelquery.month == queEvento.month &&
+                  quevienedelquery.day == queEvento.day) {
+                routesSearch.add(result.data());
+              }
+  */
 
   //Get joined routes from firestore and return a list of routes
   Future<List> getJoinedRoutes() async {

@@ -41,7 +41,7 @@ class _SearchRidesPageState extends State<SearchRidesPage> {
               child: Center(
                 child: Column(
                   children: [
-                    /*TableCalendar(
+                    TableCalendar(
                       firstDay: DateTime.utc(2010, 10, 16),
                       lastDay: DateTime.utc(2030, 3, 14),
                       focusedDay: _focusedDay,
@@ -70,9 +70,14 @@ class _SearchRidesPageState extends State<SearchRidesPage> {
                         // No need to call `setState()` here
                         _focusedDay = focusedDay;
                       },
-                    ),*/
+                    ),
+                    base_TextFormField(
+                      textController: zoneController,
+                      labelText: 'Zona',
+                      isRequired: true,
+                    ),
                     base_ElevatedButton(
-                      text: 'BUSCAR RIDE',
+                      text: 'Buscar Ride',
                       backgroundColor: const Color(0xFF064789),
                       onPressed: () {
                         buscarRide();
@@ -105,9 +110,16 @@ class _SearchRidesPageState extends State<SearchRidesPage> {
           },
         ));
   }
+
+  buscarRide() {
+    print(_focusedDay);
+    print(zoneController.text);
+    /*
+    emitir evento
+    */
+  }
 }
 
-buscarRide() {}
 
 
 
